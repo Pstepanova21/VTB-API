@@ -1,40 +1,18 @@
 doctype html
 html(lang= 'ru')
-
-head
-  meta(charset='UTF-8')
-  meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title VTB-API
+  head
+    meta(charset='utf-8')
+    title= 'Быстрый запуск Webpack'
   body
-    section.main
-      form#goalForm
-        .el
-          label(for="goal") Название цели
-          input(type="text", id="goal", name="goal", placeholder="Введите название цели", required)
-        .el
-          label(for="category") Категория
-          select(id="category", name="category", required)
-            option(value="") Выберите категорию
-            option(value="food") Еда
-            option(value="clothing") Одежда
-            option(value="travel") Путешествия
-        .el
-          label(for="amount") Сумма, которую вы хотите накопить
-          input(type="text", id="amount", name="amount", placeholder="Введите сумму", pattern="[0-9]*", title="Только цифры разрешены", required)
-        .el
-          label(for="priority") Приоритет цели:
-          select(id="priority", name="priority", required)
-            option(value="") Выберите приоритет
-            option(value="1") Высокий
-            option(value="2") Средний
-            option(value="3") Низкий
-        .el
-          label(for="endDate") Дата окончания накопления:
-          input(type="date", id="endDate", name="endDate", required)
-        .el
-          label(for="currentAmount") Сумма, которую хотите внести сейчас
-          input(type="text", id="currentAmount", name="currentAmount", placeholder="Введите сумму", pattern="[0-9]*", title="Только цифры разрешены", required)
-        button(type="submit", id="add") Пополнить
-      .form-actions
-    section.picture
-      img(src="https://s3-alpha-sig.figma.com/img/32c0/c596/6dd2b796fc33de37262580d822a2547b?Expires=1713744000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=oPoiOinwFJDcXxapgbpcnxyqfHLDNYcMJgjQtgtm2HcMl8CG0iwMIQghH0FlWqnEafjulE1uzyz-nqMOjHGujiaikq0ebkgBAKB5Q2EbLS1Sb5qomlYElTQMnjZyssBXAVfjzr5VBNAap0p7w4xcriL7-ZcT0Q9jVke2Z0LXsfeJj7b-XtYfz5uKXaNeDtrtum4fzO68XkzhkmSwsBF8Wrp1w3trBFOKPvPWqI-mFBzNCxBS8stnKffzMW~TTsoFjfnLC8drxVQA176CmCadTQs5~cjvQZ48Cws3th-3lxYEoueVpEQttaGo-ngg2f7HDgvimW9K1vKFYL0wDklWTw__", alt="")
+    p Файл откомпилирован шаблонизатором Pug
+    .logo-png
+      img.logo1(src=require('./images/image.png') alt='Загрузка PNG изображений с помощью Webpack')
+    .logo-svg
+      img.logo2(src=require('./images/logo.svg'), alt='Загрузка SVG изображений с помощью Webpack')
+
+    //- :markdown-it(linkify langPrefix='highlight-')
+    //-   ## Markdown документ
+
+    //-   - Написано на **Markdown**
+
+    include:markdown-it ../content/article.md

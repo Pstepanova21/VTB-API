@@ -5,95 +5,27 @@
 /*!**************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/main.scss ***!
   \**************************************************************************************************************************************************/
-body, input, select, button {
-  font-family: Arial, sans-serif;
+html {
+  font-size: 1rem;
+  color: rgb(143, 0, 22);
 }
 
-body {
-  display: grid;
-  grid-template-columns: 60% 40%;
-  background-color: #ededed;
-  padding: 20px;
-  margin: 0;
+@media (color-gamut: p3) {
+html {
+  color: color(display-p3 0.52982 0 0.08599);
+}
 }
 
-label {
-  color: #009fdf;
-  font-size: 16px;
+.logo1 {
+  width: 10em;
 }
 
-input[type=text],
-input[type=date],
-select {
-  background-color: #ededed;
-  width: 100%;
-  padding: 12px 20px;
-  margin-top: 10px;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+.logo2 {
+  width: 10em;
 }
 
-img {
-  max-width: 100%;
-}
-
-.main {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  height: 90vh;
-  padding: 20px;
-  border: 2px solid white;
-  border-radius: 5px;
-  background-color: white;
-}
-
-.picture {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin-left: 20px;
-  height: 90vh;
-  padding: 20px;
-  border: 2px solid white;
-  border-radius: 5px;
-  background-color: white;
-}
-
-.el {
-  margin-top: 30px;
-}
-
-#endDate {
-  margin-bottom: 50px;
-}
-
-#goalForm {
-  margin-top: 50px;
-  width: 50%;
-}
-
-button#add {
-  background-color: #0a2973;
-  font-size: 20px;
-  color: white;
-  padding: 14px 20px;
-  margin: 30px 0;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  width: 100%;
-  -webkit-transition: 0.3s ease;
-  transition: 0.3s ease;
-}
-button#add:hover {
-  background-color: rgba(17, 46, 119, 0.8666666667);
+html {
+  font-family: "Ubuntu";
 }
 /*!*************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/fonts/fonts.scss (1) ***!

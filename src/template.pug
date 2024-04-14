@@ -27,14 +27,14 @@ head
           label(for="amount") Сумма, которую вы хотите накопить
           input(type="text", id="amount", name="amount", placeholder="Введите сумму", pattern="[0-9]*", title="Только цифры разрешены", required)
         .el
-          label(for="priority") Приоритет цели:
+          label(for="priority") Приоритет цели
           select(id="priority", name="priority", required)
             option(value="") Выберите приоритет
             option(value="1") Высокий
             option(value="2") Средний
             option(value="3") Низкий
         .el
-          label(for="endDate") Дата окончания накопления:
+          label(for="endDate") Дата окончания накопления
           input(type="date", id="endDate", name="endDate", required)
         .el
           label(for="currentAmount") Сумма, которую хотите внести сейчас

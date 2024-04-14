@@ -8,37 +8,49 @@ const form = document.getElementById("goalForm");
 form.addEventListener("submit", function (event) {
   event.preventDefault(); // Предотвращаем стандартное поведение формы
 
-  // Получаем значения из формы
+  // Получаем текущую дату и время
+  const currentDate = new Date();
+
+  // Получаем значение даты из формы
+  const endDate = new Date(document.getElementById("endDate").value);
+  const today = new Date(); // Получаем текущую дату
+
+  // Проверяем, если выбранная дата меньше текущей, выводим сообщение об ошибке и не сохраняем данные
+  if (endDate < today) {
+    window.alert("Пожалуйста, выберите дату не ранее сегодняшнего дня.");
+    return; // Прекращаем выполнение функции
+  }
+
+  // Получаем значения из остальных полей формы
   const goal = document.getElementById("goal").value;
   const category = document.getElementById("category").value;
   const amount = document.getElementById("amount").value;
   const priority = document.getElementById("priority").value;
-  const endDate = document.getElementById("endDate").value;
   const currentAmount = document.getElementById("currentAmount").value;
 
-  // Выводим результат в консоль
-  console.log(`Ваша цель: ${goal}`);
-  console.log(`Категория: ${category}`);
-  console.log(`Сумма, которую вы хотите накопить: ${amount}`);
-  console.log(`Приоритет цели: ${priority}`);
-  console.log(`Дата окончания накопления: ${endDate}`);
-  console.log(`Сумма, которую хотите внести сейчас: ${currentAmount}`);
+  // Создаем объект для хранения данных текущей цели
+  const goalData = {
+    goal: goal,
+    category: category,
+    amount: amount,
+    priority: priority,
+    endDate: endDate.toLocaleDateString(), // Преобразуем дату в строку для сохранения
+    currentAmount: currentAmount,
+    creationDate: currentDate.toLocaleString(), // Добавляем текущую дату и время создания цели
+  };
+
+  // Получаем сохраненные ранее цели из локального хранилища
+  let savedGoals = JSON.parse(localStorage.getItem("goals")) || [];
+
+  // Добавляем текущую цель к сохраненным целям
+  savedGoals.push(goalData);
+
+  // Сохраняем обновленный массив целей в локальное хранилище
+  localStorage.setItem("goals", JSON.stringify(savedGoals));
+
+  // Выводим результат в консоль (можно удалить эту строку)
+  console.log("Цель сохранена в локальном хранилище.");
 
   // Очищаем поля формы
-  document.getElementById("goal").value = "";
-  document.getElementById("category").value = "";
-  document.getElementById("amount").value = "";
-  document.getElementById("priority").value = "";
-  document.getElementById("endDate").value = "";
-  document.getElementById("currentAmount").value = "";
-});
-
-// Добавляем обработчик для поля ввода даты
-const endDateInput = document.getElementById("endDate");
-const today = new Date().toISOString().split("T")[0]; // Получаем сегодняшнюю дату в формате YYYY-MM-DD
-
-endDateInput.addEventListener("input", function () {
-  if (this.value < today) {
-    this.value = today; // Если введенная дата меньше текущей, то устанавливаем текущую дату
-  }
+  form.reset();
 });

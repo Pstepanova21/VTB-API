@@ -48,7 +48,7 @@ form.addEventListener("submit", function (event) {
   // Сохраняем обновленный массив целей в локальное хранилище
   localStorage.setItem("goals", JSON.stringify(savedGoals));
 
-  // Выводим результат в консоль (можно удалить эту строку)
+  // Выводим результат в консоль
   console.log("Цель сохранена в локальном хранилище.");
 
   // Очищаем поля формы

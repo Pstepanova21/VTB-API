@@ -15,9 +15,14 @@ head
           label(for="category") Категория
           select(id="category", name="category", required)
             option(value="") Выберите категорию
-            option(value="food") Еда
-            option(value="clothing") Одежда
-            option(value="travel") Путешествия
+            option(value="house") Дом
+            option(value="car") Машина
+            option(value="equipment") Техника
+            option(value="kids") Дети
+            option(value="education") Обучение
+            option(value="travel") Отпуск
+            option(value="shopping") Шоппинг
+            option(value="other") Другое
         .el
           label(for="amount") Сумма, которую вы хотите накопить
           input(type="text", id="amount", name="amount", placeholder="Введите сумму", pattern="[0-9]*", title="Только цифры разрешены", required)

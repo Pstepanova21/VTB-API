@@ -8,38 +8,43 @@ head
   body
     section.main
       form#goalForm
-        .el
-          label(for="goal") Название цели
-          input(type="text", id="goal", name="goal", placeholder="Введите название цели", required)
-        .el
-          label(for="category") Категория
-          select(id="category", name="category", required)
-            option(value="") Выберите категорию
-            option(value="house") Дом
-            option(value="car") Машина
-            option(value="equipment") Техника
-            option(value="kids") Дети
-            option(value="education") Обучение
-            option(value="travel") Отпуск
-            option(value="shopping") Шоппинг
-            option(value="other") Другое
-        .el
-          label(for="amount") Сумма, которую вы хотите накопить
-          input(type="text", id="amount", name="amount", placeholder="Введите сумму", pattern="[0-9]*", title="Только цифры разрешены", required)
-        .el
-          label(for="priority") Приоритет цели
-          select(id="priority", name="priority", required)
-            option(value="") Выберите приоритет
-            option(value="1") Высокий
-            option(value="2") Средний
-            option(value="3") Низкий
-        .el
-          label(for="endDate") Дата окончания накопления
-          input(type="date", id="endDate", name="endDate", required)
-        .el
-          label(for="currentAmount") Сумма, которую хотите внести сейчас
-          input(type="text", id="currentAmount", name="currentAmount", placeholder="Введите сумму", pattern="[0-9]*", title="Только цифры разрешены", required)
-        button(type="submit", id="add") Пополнить
+        .general-wrapper#general-wrapper
+        .container#container    
+          .el
+            label(for="goal") Название цели
+            input(type="text", id="goal", name="goal", placeholder="Введите название цели", required)
+          .el
+            label(for="category") Категория
+            select(id="category", name="category", required)
+              option(value="") Выберите категорию
+              option(value="house") Дом
+              option(value="car") Машина
+              option(value="equipment") Техника
+              option(value="kids") Дети
+              option(value="education") Обучение
+              option(value="travel") Отпуск
+              option(value="shopping") Шоппинг
+              option(value="other") Другое
+          .el
+            label(for="amount") Сумма, которую вы хотите накопить, руб.
+            input(type="text", id="amount", name="amount", placeholder="Введите сумму", pattern="[0-9]*", title="Только цифры разрешены", required)
+          .el
+            label(for="priority") Приоритет цели
+            select(id="priority", name="priority", required)
+              option(value="") Выберите приоритет
+              option(value="1") Высокий
+              option(value="2") Средний
+              option(value="3") Низкий
+          .el
+            label(for="endDate") Дата окончания накопления
+            input(type="date", id="endDate", name="endDate", required)
+          .el
+            label(for="currentAmount") Сумма, которую хотите внести сейчас, руб.
+            input(type="text", id="currentAmount", name="currentAmount", placeholder="Введите сумму", pattern="[0-9]*", title="Только цифры разрешены", )
+          .block_for_btn
+            button(type="submit",id="btn_save") Сохранить 
+            button(type="submit", id="btn_cancel") Отмена
+          //button(type="submit", id="add") Пополнить
       .form-actions
-    section.picture
+    section.picture#picture
       img(src="https://s3-alpha-sig.figma.com/img/32c0/c596/6dd2b796fc33de37262580d822a2547b?Expires=1713744000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=oPoiOinwFJDcXxapgbpcnxyqfHLDNYcMJgjQtgtm2HcMl8CG0iwMIQghH0FlWqnEafjulE1uzyz-nqMOjHGujiaikq0ebkgBAKB5Q2EbLS1Sb5qomlYElTQMnjZyssBXAVfjzr5VBNAap0p7w4xcriL7-ZcT0Q9jVke2Z0LXsfeJj7b-XtYfz5uKXaNeDtrtum4fzO68XkzhkmSwsBF8Wrp1w3trBFOKPvPWqI-mFBzNCxBS8stnKffzMW~TTsoFjfnLC8drxVQA176CmCadTQs5~cjvQZ48Cws3th-3lxYEoueVpEQttaGo-ngg2f7HDgvimW9K1vKFYL0wDklWTw__", alt="")

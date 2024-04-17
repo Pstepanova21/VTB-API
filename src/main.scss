@@ -1,4 +1,7 @@
-body, input, select, button {
+body,
+input,
+select,
+button {
   font-family: Arial, sans-serif;
 }
 
@@ -34,7 +37,7 @@ img {
 
 .main {
   display: flex;
-  height: 90vh;
+  // height: 90vh;
   padding: 20px;
   border: 2px solid white;
   border-radius: 5px;
@@ -45,7 +48,7 @@ img {
   display: flex;
   align-items: center;
   margin-left: 20px;
-  height: 90vh;
+  // height: 90vh;
   padding: 20px;
   border: 2px solid white;
   border-radius: 5px;
@@ -61,6 +64,9 @@ img {
 }
 
 #goalForm {
+  width: 100%;
+}
+.container {
   width: 50%;
 }
 
@@ -78,5 +84,33 @@ button#add {
 
   &:hover {
     background-color: #112e77dd;
+  }
+}
+
+.error {
+  font-size: 14px;
+  color: red;
+}
+.block_for_btn {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 30px;
+  gap: 1.25rem;
+  #btn_cancel,
+  #btn_save {
+    width: 12.875rem;
+    height: 3rem;
+    border-radius: 10px;
+    background-color: white;
+    color: #009fdf;
+    font-size: 17px;
+    font-weight: 600;
+    border: 2px solid #009fdf;
+    cursor: pointer;
+    transition: 0.3s ease;
+    &:hover {
+      background-color: #009fdf;
+      color: white;
+    }
   }
 }

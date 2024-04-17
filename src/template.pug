@@ -9,7 +9,7 @@ head
     section.main
       form#goalForm
         .general-wrapper#general-wrapper
-        .container#container    
+        .container#container 
           .el
             label(for="goal") Название цели
             input(type="text", id="goal", name="goal", placeholder="Введите название цели", required)
@@ -40,7 +40,7 @@ head
             input(type="date", id="endDate", name="endDate", required)
           .el
             label(for="currentAmount") Сумма, которую хотите внести сейчас, руб.
-            input(type="text", id="currentAmount", name="currentAmount", placeholder="Введите сумму", pattern="[0-9]*", title="Только цифры разрешены", )
+            input(id="currentAmount",type='text' ,name="currentAmount", placeholder="Введите сумму", pattern="[0-9]*", title="Только цифры разрешены", )
           .block_for_btn
             button(type="submit",id="btn_save") Сохранить 
             button(type="submit", id="btn_cancel") Отмена

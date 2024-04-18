@@ -2,11 +2,7 @@ body,
 input,
 select,
 button {
-<<<<<<< Updated upstream
-  font-family: Arial, sans-serif;
-=======
 	font-family: Arial, sans-serif;
->>>>>>> Stashed changes
 }
 
 body {
@@ -144,35 +140,33 @@ button#add {
 	width: 1px;
 }
 
-<<<<<<< Updated upstream
 .error {
-  font-size: 14px;
-  color: red;
+	font-size: 14px;
+	color: red;
 }
 .block_for_btn {
-  display: flex;
-  justify-content: flex-start;
-  margin-top: 30px;
-  gap: 1.25rem;
-  #btn_cancel,
-  #btn_save {
-    width: 12.875rem;
-    height: 3rem;
-    border-radius: 10px;
-    background-color: white;
-    color: #009fdf;
-    font-size: 17px;
-    font-weight: 600;
-    border: 2px solid #009fdf;
-    cursor: pointer;
-    transition: 0.3s ease;
-    &:hover {
-      background-color: #009fdf;
-      color: white;
-    }
-  }
+	display: flex;
+	justify-content: flex-start;
+	margin-top: 30px;
+	gap: 1.25rem;
+	#btn_cancel,
+	#btn_save {
+		width: 12.875rem;
+		height: 3rem;
+		border-radius: 10px;
+		background-color: white;
+		color: #009fdf;
+		font-size: 17px;
+		font-weight: 600;
+		border: 2px solid #009fdf;
+		cursor: pointer;
+		transition: 0.3s ease;
+		&:hover {
+			background-color: #009fdf;
+			color: white;
+		}
+	}
 }
-=======
 .chooseWrapper {
 	margin: auto;
 	width: 200px;
@@ -221,4 +215,3 @@ button#add {
 }
 
 //КОНЕЦ выбор изображения
->>>>>>> Stashed changes

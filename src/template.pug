@@ -1,18 +1,26 @@
 doctype html
 html(lang= 'ru')
-  head
-    meta(charset='utf-8')
-    title= 'Быстрый запуск Webpack'
+
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title VTB-API
   body
-    p Файл откомпилирован шаблонизатором Pug
-    .logo-png
-      img.logo1(src=require('./images/image.png') alt='Загрузка PNG изображений с помощью Webpack')
-    .logo-svg
-      img.logo2(src=require('./images/logo.svg'), alt='Загрузка SVG изображений с помощью Webpack')
-
-    //- :markdown-it(linkify langPrefix='highlight-')
-    //-   ## Markdown документ
-
-    //-   - Написано на **Markdown**
-
-    include:markdown-it ../content/article.md
+    .general_wrapper
+      header
+        .header_wrapper
+          img#logoImg(src='images/Logo.png', alt='logo')
+          #header_top
+            img#userImg(src='images/UserAvatar.png', alt='user')
+            button#target_add_button.target_add_button
+          #header_middle
+            button#home_page.home_page
+            button#target_page.target_page
+            button#setting_page.setting_page
+          #header_bottom
+            button#help_page.help_page
+            button#logout_page.logout_page
+      main
+        section.target_page_wrapper
+          .target_wrapper
+          .target_empty-error

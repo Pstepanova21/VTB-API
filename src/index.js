@@ -202,11 +202,10 @@ targetAddButton.addEventListener("click", changePage);
 
 function changePage() {
   targetPage.classList.remove("active_menu_button");
-  targetPage.style.backgroundImage = "url(assets/svg/menu_middle2.svg)";
+  targetPage.style.backgroundImage = "url(images/menu_middle2.svg)";
 
   targetAddButton.classList.add("active_menu_button");
-  targetAddButton.style.backgroundImage =
-    "url(assets/svg/menu_top1_active.svg)";
+  targetAddButton.style.backgroundImage = "url(images/menu_top1_active.svg)";
 
   targetPageWrapper.classList.add("hidden");
 }
@@ -215,9 +214,9 @@ function changePage() {
 // Елементы массива преобразуется в объекты, из них создаются карточки
 document.addEventListener("DOMContentLoaded", () => {
   targetPage.classList.add("active_menu_button");
-  targetPage.style.backgroundImage = "url(assets/svg/menu_middle2_active.svg)";
+  targetPage.style.backgroundImage = "url(images/menu_middle2_active.svg)";
 
-  targetAddButton.style.backgroundImage = "url(assets/svg/menu_top1.svg)";
+  targetAddButton.style.backgroundImage = "url(images/menu_top1.svg)";
   targetAddButton.classList.remove("active_menu_button");
 
   emptyError.textContent = "";
@@ -348,7 +347,7 @@ function createTargetCard(target) {
   if (target.getProgressNum() === 100) {
     targetInfo.classList.add("hidden");
     targetInfoVictory.innerHTML = `
-    <img class="target_victory" src="./assets/svg/target_victory.svg" alt="Цель выполнена">
+    <img class="target_victory" src="./images/target_victory.svg" alt="Цель выполнена">
     <p class="info-value">Цель выполнена</p>
     `;
   }
@@ -406,7 +405,7 @@ function createTargetCard(target) {
     );
     const buttonCloseModal = modalBackGround.querySelector(".modal-close");
     buttonCloseModal.style.backgroundImage =
-      "url(assets/svg/target_add_savings_close.svg)";
+      "url(images/target_add_savings_close.svg)";
     const inputSum = modalBackGround.querySelector(".input-sum");
     const savedSumElement = modalBackGround.querySelector(".saved-sum");
     const diffSumElement = modalBackGround.querySelector(".difference-sum");
@@ -440,7 +439,7 @@ function createTargetCard(target) {
         target.getDifferenceSum().toLocaleString("ru-RU") + " ₽";
 
       buttonCloseModal.style.backgroundImage =
-        "url(assets/svg/target_add_savings_save.svg)";
+        "url(images/target_add_savings_save.svg)";
 
       // Проверка состояния кнопок внутри модального окна
       if (target.getTotalSum() === target.getSavedSum()) {
@@ -540,7 +539,7 @@ function createTargetCard(target) {
       if (savedSumModal[3] === 100) {
         targetInfo.classList.add("hidden");
         targetInfoVictory.innerHTML = `
-    <img class="target_victory" src="./assets/svg/target_victory.svg" alt="Цель выполнена">
+    <img class="target_victory" src="./images/target_victory.svg" alt="Цель выполнена">
     <p class="info-value">Цель выполнена</p>
     `;
       }

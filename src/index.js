@@ -19,9 +19,7 @@ class Target {
     this.startDate = startDate;
     this.dueDate = dueDate;
     this.savedSum = savedSum;
-    this.button;
   }
-
   getName() {
     return this.name;
   }
@@ -48,7 +46,7 @@ class Target {
     return this.category;
   }
   getTotalSum() {
-    return this.totalSum.toLocaleString("ru-RU");
+    return this.totalSum;
   }
   getPriority() {
     return this.priority;
@@ -87,10 +85,10 @@ class Target {
     return difference + " " + ending;
   }
   getSavedSum() {
-    return this.savedSum.toLocaleString("ru-RU");
+    return this.savedSum;
   }
   addSavings(addSumm) {
-    return (this.savedSum = this.savedSum + addSumm).toLocaleString("ru-RU");
+    return (this.savedSum = this.savedSum + addSumm);
   }
   getDifferenceSum() {
     return (this.totalSum - this.savedSum).toLocaleString("ru-RU");
@@ -104,16 +102,26 @@ class Target {
     }
     return percent;
   }
-  setButton(button) {
-    return (this.button = button);
+  additionalSavings(amount) {
+    if (amount <= this.totalSum - this.savedSum) {
+      this.savedSum += amount;
+      return true;
+    } else {
+      return false;
+    }
   }
-  getButton() {
-    return this.button;
+  withdrawSavings(amount) {
+    if (this.savedSum >= amount) {
+      this.savedSum -= amount;
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
 // Массив с целями из Local storage
-// let targetsListJson = localStorage.getItem("targetsList");
+// let targetsListJson = localStorage.getItem("savedGoals");
 // let targetsList = targetsListJson ? JSON.parse(targetsListJson) : [];
 
 // Проверочный пример массива объектов
@@ -172,7 +180,7 @@ let targetsList = [
     priority: "2",
     startDate: today,
     dueDate: new Date("2024-08-18"),
-    savedSum: 300000,
+    savedSum: 500000,
   },
   {
     name: "Компьютер",
@@ -185,9 +193,33 @@ let targetsList = [
   },
 ];
 
+// Прописываем стиль по умолчанию кнопок бокового меню
+const targetPageWrapper = document.querySelector(".target_page_wrapper");
+const targetPage = document.getElementById("target_page");
+const targetAddButton = document.getElementById("target_add_button");
+
+targetAddButton.addEventListener("click", changePage);
+
+function changePage() {
+  targetPage.classList.remove("active_menu_button");
+  targetPage.style.backgroundImage = "url(assets/svg/menu_middle2.svg)";
+
+  targetAddButton.classList.add("active_menu_button");
+  targetAddButton.style.backgroundImage =
+    "url(assets/svg/menu_top1_active.svg)";
+
+  targetPageWrapper.classList.add("hidden");
+}
+
 // Для отображения целей из Local storage при загрузке страницы
 // Елементы массива преобразуется в объекты, из них создаются карточки
 document.addEventListener("DOMContentLoaded", () => {
+  targetPage.classList.add("active_menu_button");
+  targetPage.style.backgroundImage = "url(assets/svg/menu_middle2_active.svg)";
+
+  targetAddButton.style.backgroundImage = "url(assets/svg/menu_top1.svg)";
+  targetAddButton.classList.remove("active_menu_button");
+
   emptyError.textContent = "";
   if (targetsList.length === 0) {
     emptyError.textContent = "Добавьте первую цель";
@@ -195,6 +227,13 @@ document.addEventListener("DOMContentLoaded", () => {
     sortTargetList();
     targetsList.forEach(function (target) {
       let targetElement = new Target(
+        // target.goal,
+        // target.category,
+        // target.amount,
+        // target.priority,
+        // target.creationDate,
+        // target.endDate,
+        // target.currentAmount
         target.name,
         target.category,
         target.sum,
@@ -204,7 +243,6 @@ document.addEventListener("DOMContentLoaded", () => {
         target.savedSum
       );
       createTargetCard(targetElement);
-      buttonAddSavings(targetElement);
     });
   }
 });
@@ -244,34 +282,46 @@ function createTargetCard(target) {
   </div>
   <div class="target_sum-rest">
   <p class="info-title">Осталось собрать:</p>
-  <p class="info-value">${target.getDifferenceSum()} ₽</p>
+  <p class="info-value target_card_diff">${target
+    .getDifferenceSum()
+    .toLocaleString("ru-RU")} ₽</p>
   </div>
   </div>
   </div>
   <div class="target_progress">
-  <p>Прогресс цели: <span>${target.getSavedSum()} ₽ из ${target.getTotalSum()} ₽</span></p>
+  <p>Прогресс цели: <span class="target_card_saved">${target
+    .getSavedSum()
+    .toLocaleString("ru-RU")} ₽ из ${target
+    .getTotalSum()
+    .toLocaleString("ru-RU")} ₽</span></p>
   <div class="progress-bar">
   <div class="progress-bar-inner"></div>
   </div>
   </div>`;
 
+  // Создание подсказки
+  const buttonTargetAddSavings = targetCard.querySelector(
+    ".target_add_savings"
+  );
+  buttonTargetAddSavings.title = "Нажмите для пополнения или снятия";
+
   // Создание прогресс-бара
   const progressBar = targetCard.querySelector(".progress-bar");
   const progressBarInner = targetCard.querySelector(".progress-bar-inner");
-
+  let progressBarText = document.createElement("div");
   // Определение цвета прогресс-бара
   let progressColor =
     target.getProgressNum() < 19
-      ? "inner-start"
+      ? "#df2216"
       : target.getProgressNum() >= 20 && target.getProgressNum() < 79
-      ? "inner-middle"
-      : target.getProgressNum() >= 80
-      ? "inner-finish"
-      : "";
-  progressBarInner.classList.add(progressColor);
+      ? "#b6cc2d"
+      : target.getProgressNum() >= 80 && target.getProgressNum() < 100
+      ? "#50db3a"
+      : "#009fdf";
+  progressBarInner.style.background = progressColor;
 
   // Решение стилизации маленького значения процента
-  if (target.getProgressNum() > 5) {
+  if (target.getProgressNum() > 5 || target.getProgressNum() === 0) {
     progressBarInner.style.width = target.getProgressNum() + "%";
   } else {
     progressBarInner.style.width = "4%";
@@ -279,7 +329,6 @@ function createTargetCard(target) {
   }
 
   // Определение местоположения значения процента
-  let progressBarText = document.createElement("div");
   progressBarText.textContent = target.getProgressNum() + "%";
   progressBarText.classList.add("progress_bar_text");
 
@@ -289,19 +338,30 @@ function createTargetCard(target) {
     progressBar.append(progressBarText);
   }
 
-  // Стучимся к кнопкам в карточках
-  target.setButton(targetCard.querySelector(".target_add_savings"));
-}
+  //Анимация не заработала - сделали пока стилизацию
+  const targetInfo = targetCard.querySelector(".target_info");
+  const target_description = targetCard.querySelector(".target_description");
 
-// Создание модального окна
-const generalWrapper = document.querySelector(".general_wrapper");
-const modalBackGround = document.createElement("div");
-generalWrapper.append(modalBackGround);
+  const targetInfoVictory = document.createElement("div");
+  target_description.append(targetInfoVictory);
 
-function buttonAddSavings(target) {
-  target.getButton().onclick = function () {
+  if (target.getProgressNum() === 100) {
+    targetInfo.classList.add("hidden");
+    targetInfoVictory.innerHTML = `
+    <img class="target_victory" src="./assets/svg/target_victory.svg" alt="Цель выполнена">
+    <p class="info-value">Цель выполнена</p>
+    `;
+  }
+
+  // Создание модального окна
+  const differenceSumText = targetCard.querySelector(".target_card_diff");
+  const savedSumText = targetCard.querySelector(".target_card_saved");
+  const generalWrapper = document.querySelector(".general_wrapper");
+  const modalBackGround = document.createElement("div");
+  generalWrapper.append(modalBackGround);
+
+  targetCard.querySelector(".target_add_savings").onclick = function () {
     modalBackGround.classList.add("modal-background");
-
     // Тело модального окна по нажатию кнопки
     modalBackGround.innerHTML = `
     <div class="modal-window">
@@ -312,7 +372,7 @@ function buttonAddSavings(target) {
     <div class="modal-info">
     <div class="modal_totalsum_info">
     <p class="info-title">Сумма для накопления:</p>
-    <p class="info-value">${target.getTotalSum()} ₽</p>
+    <p class="info-value">${target.getTotalSum().toLocaleString("ru-RU")} ₽</p>
     </div>
     <div class="modal_duedate_info">
     <p class="info-title">Дата окончания накопления:</p>
@@ -320,17 +380,170 @@ function buttonAddSavings(target) {
     </div>
     </div>
     <div class="target_progress">
-    <p>Накоплено: <span>${target.getSavedSum()} ₽ из ${target.getTotalSum()} ₽</span></p>
-    <p>До выполнения цели: <span>${target.getDifferenceSum()} ₽</p>
+    <p>Накоплено: <span class="saved-sum">${target
+      .getSavedSum()
+      .toLocaleString("ru-RU")} ₽</span></p>
+    <p>До выполнения цели: <span class="difference-sum">${target
+      .getDifferenceSum()
+      .toLocaleString("ru-RU")} ₽</span></p>
+    </div>
+    <div class="modal-button-wrapper">
+    <div class="modal-buttons">
+    <input type="number" class="input-sum" placeholder="Введите сумму, руб">
+    <button class="modal-add-saving">Пополнить</button>
+    <button class="modal-withdraw-savings">Снять</button>
+    </div>
+    <p class="error-display"></p>
     </div>
     </div>
   </div>`;
 
-    // Кнопка закрытия модального окна
+    //Находим элементы для работы внутри функции
+    const errorDisplay = modalBackGround.querySelector(".error-display");
+    const buttonAddSavings = modalBackGround.querySelector(".modal-add-saving");
+    const buttonWDSavings = modalBackGround.querySelector(
+      ".modal-withdraw-savings"
+    );
     const buttonCloseModal = modalBackGround.querySelector(".modal-close");
-    buttonCloseModal.onclick = function () {
+    buttonCloseModal.style.backgroundImage =
+      "url(assets/svg/target_add_savings_close.svg)";
+    const inputSum = modalBackGround.querySelector(".input-sum");
+    const savedSumElement = modalBackGround.querySelector(".saved-sum");
+    const diffSumElement = modalBackGround.querySelector(".difference-sum");
+    let savedSumModal = [
+      target.getSavedSum(),
+      target.getDifferenceSum(),
+      target.getTotalSum(),
+      target.getProgressNum(),
+    ];
+
+    // Проверка состояния кнопок внутри модального окна
+    if (target.getTotalSum() === target.getSavedSum()) {
+      buttonAddSavings.disabled = true;
+      buttonWDSavings.disabled = false;
+    } else {
+      if (target.getSavedSum() === 0) {
+        buttonWDSavings.disabled = true;
+        buttonAddSavings.disabled = false;
+      } else {
+        buttonAddSavings.disabled = false;
+        buttonWDSavings.disabled = false;
+      }
+    }
+
+    function updateTargetInfo(target) {
+      // Обновление модального после нажатия кнопок
+      inputSum.value = "";
+      savedSumElement.textContent =
+        target.getSavedSum().toLocaleString("ru-RU") + " ₽";
+      diffSumElement.textContent =
+        target.getDifferenceSum().toLocaleString("ru-RU") + " ₽";
+
+      buttonCloseModal.style.backgroundImage =
+        "url(assets/svg/target_add_savings_save.svg)";
+
+      // Проверка состояния кнопок внутри модального окна
+      if (target.getTotalSum() === target.getSavedSum()) {
+        buttonAddSavings.disabled = true;
+        buttonWDSavings.disabled = false;
+      } else {
+        if (target.getSavedSum() === 0) {
+          buttonWDSavings.disabled = true;
+          buttonAddSavings.disabled = false;
+        } else {
+          buttonAddSavings.disabled = false;
+          buttonWDSavings.disabled = false;
+        }
+      }
+      // Обновление блоков, если до этого было 100%
+      targetInfo.classList.remove("hidden");
+      targetInfoVictory.innerHTML = "";
+      return (savedSumModal = [
+        target.getSavedSum(),
+        target.getDifferenceSum(),
+        target.getTotalSum(),
+        target.getProgressNum(),
+      ]);
+    }
+
+    //Пополнение средств
+    buttonAddSavings.onclick = function () {
+      errorDisplay.textContent = "";
+      const savingAmount = Number(inputSum.value);
+      if (savingAmount < 0) {
+        errorDisplay.textContent = "Сумма операции не может быть отрицательной";
+      } else {
+        if (target.additionalSavings(savingAmount)) {
+          updateTargetInfo(target);
+          return savedSumModal;
+        } else {
+          errorDisplay.textContent = "Превышение итоговой суммы цели";
+        }
+      }
+    };
+
+    //Снятие средств
+    buttonWDSavings.onclick = function () {
+      errorDisplay.textContent = "";
+      const withdrawalAmount = Number(inputSum.value);
+      if (withdrawalAmount < 0) {
+        errorDisplay.textContent = "Сумма операции не может быть отрицательной";
+      } else {
+        if (target.withdrawSavings(withdrawalAmount)) {
+          updateTargetInfo(target);
+          return savedSumModal;
+        } else {
+          errorDisplay.textContent = "Недостаточно средств для снятия";
+        }
+      }
+    };
+
+    // Кнопка закрытия модального окна
+    buttonCloseModal.onclick = function (target) {
       modalBackGround.classList.remove("modal-background");
       modalBackGround.innerHTML = "";
+      savedSumText.textContent = `${savedSumModal[0].toLocaleString(
+        "ru-RU"
+      )} ₽ из ${savedSumModal[2].toLocaleString("ru-RU")} ₽`;
+      differenceSumText.textContent =
+        savedSumModal[1].toLocaleString("ru-RU") + " ₽";
+      // Будет повтор, подумать над оптимизацией:
+      // Кусок раз:
+      let progressColorTwo =
+        savedSumModal[3] < 19
+          ? "#df2216"
+          : savedSumModal[3] >= 20 && savedSumModal[3] < 79
+          ? "#b6cc2d"
+          : savedSumModal[3] >= 80 && savedSumModal[3] < 100
+          ? "#50db3a"
+          : "#009fdf";
+      progressBarInner.style.background = progressColorTwo;
+
+      // Кусок два:
+      if (savedSumModal[3] > 5 || savedSumModal[3] === 0) {
+        progressBarInner.style.width = savedSumModal[3] + "%";
+        progressBarInner.style.borderRadius = "0.625rem";
+      } else {
+        progressBarInner.style.width = "4%";
+        progressBarInner.style.borderRadius = "0.625rem 0 0 0.625rem";
+      }
+      // Кусок три:
+      progressBarText.textContent = savedSumModal[3] + " %";
+
+      if (savedSumModal[3] >= 20) {
+        progressBarInner.append(progressBarText);
+      } else {
+        progressBar.append(progressBarText);
+      }
+
+      // Кусок четыре - 100%
+      if (savedSumModal[3] === 100) {
+        targetInfo.classList.add("hidden");
+        targetInfoVictory.innerHTML = `
+    <img class="target_victory" src="./assets/svg/target_victory.svg" alt="Цель выполнена">
+    <p class="info-value">Цель выполнена</p>
+    `;
+      }
     };
   };
 }

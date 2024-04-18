@@ -8,8 +8,12 @@ head
   body
     section.main
       form#goalForm
+<<<<<<< Updated upstream
         .general-wrapper#general-wrapper
         .container#container 
+=======
+        .left
+>>>>>>> Stashed changes
           .el
             label(for="goal") Название цели
             input(type="text", id="goal", name="goal", placeholder="Введите название цели", required)
@@ -26,7 +30,11 @@ head
               option(value="shopping") Шоппинг
               option(value="other") Другое
           .el
+<<<<<<< Updated upstream
             label(for="amount") Сумма, которую вы хотите накопить, руб.
+=======
+            label(for="amount") Сумма, которую вы хотите накопить
+>>>>>>> Stashed changes
             input(type="text", id="amount", name="amount", placeholder="Введите сумму", pattern="[0-9]*", title="Только цифры разрешены", required)
           .el
             label(for="priority") Приоритет цели
@@ -39,12 +47,45 @@ head
             label(for="endDate") Дата окончания накопления
             input(type="date", id="endDate", name="endDate", required)
           .el
+<<<<<<< Updated upstream
             label(for="currentAmount") Сумма, которую хотите внести сейчас, руб.
             input(id="currentAmount",type='text' ,name="currentAmount", placeholder="Введите сумму", pattern="[0-9]*", title="Только цифры разрешены", )
           .block_for_btn
             button(type="submit",id="btn_save") Сохранить 
             button(type="submit", id="btn_cancel") Отмена
           //button(type="submit", id="add") Пополнить
+=======
+            label(for="currentAmount") Сумма, которую хотите внести сейчас
+            input(type="text", id="currentAmount", name="currentAmount", placeholder="Введите сумму", pattern="[0-9]*", title="Только цифры разрешены", required)
+          button(type="submit", id="add") Пополнить
+          .choosePicture
+            img.closeImg(src='../src/images/close_image.svg')
+            label.choosePicture__label(for='homePicture')
+              input#homePicture.sr-only(type='radio' name='picture' value='https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
+              img.pictureImg(src='https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
+            label.choosePicture__label(for='carPicture')
+              input#carPicture.sr-only(type='radio' name='picture' value='https://images.pexels.com/photos/18262220/pexels-photo-18262220.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
+              img.pictureImg(src='https://images.pexels.com/photos/18262220/pexels-photo-18262220.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
+            label.choosePicture__label(for='techPicture')
+              input#techPicture.sr-only(type='radio' name='picture' value='https://images.pexels.com/photos/326503/pexels-photo-326503.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
+              img.pictureImg(src='https://images.pexels.com/photos/326503/pexels-photo-326503.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
+            label.choosePicture__label(for='kidsPicture')
+              input#kidsPicture.sr-only(type='radio' name='picture' value='https://images.pexels.com/photos/8208262/pexels-photo-8208262.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
+              img.pictureImg(src='https://images.pexels.com/photos/8208262/pexels-photo-8208262.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
+            label.choosePicture__label(for='studyingPicture')
+              input#studyingPicture.sr-only(type='radio' name='picture' value='https://images.pexels.com/photos/9572509/pexels-photo-9572509.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
+              img.pictureImg(src='https://images.pexels.com/photos/9572509/pexels-photo-9572509.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
+            label.choosePicture__label(for='travelPicture')
+              input#travelPicture.sr-only(type='radio' name='picture' value='https://images.pexels.com/photos/2373201/pexels-photo-2373201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
+              img.pictureImg(src='https://images.pexels.com/photos/2373201/pexels-photo-2373201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
+            label.choosePicture__label(for='defaultPicture')
+              input#defaultPicture.sr-only(type='radio' name='picture' value='https://images.pexels.com/photos/3393477/pexels-photo-3393477.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
+              img.pictureImg(src='https://images.pexels.com/photos/3393477/pexels-photo-3393477.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
+            button#choosePicture__button(type="button") Выбрать картинку
+        .chooseWrapper
+          .chooseImg
+            img.chooseImg_img(src='../src/images/add_image.svg')
+>>>>>>> Stashed changes
       .form-actions
     section.picture#picture
       img(src="https://s3-alpha-sig.figma.com/img/32c0/c596/6dd2b796fc33de37262580d822a2547b?Expires=1713744000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=oPoiOinwFJDcXxapgbpcnxyqfHLDNYcMJgjQtgtm2HcMl8CG0iwMIQghH0FlWqnEafjulE1uzyz-nqMOjHGujiaikq0ebkgBAKB5Q2EbLS1Sb5qomlYElTQMnjZyssBXAVfjzr5VBNAap0p7w4xcriL7-ZcT0Q9jVke2Z0LXsfeJj7b-XtYfz5uKXaNeDtrtum4fzO68XkzhkmSwsBF8Wrp1w3trBFOKPvPWqI-mFBzNCxBS8stnKffzMW~TTsoFjfnLC8drxVQA176CmCadTQs5~cjvQZ48Cws3th-3lxYEoueVpEQttaGo-ngg2f7HDgvimW9K1vKFYL0wDklWTw__", alt="")

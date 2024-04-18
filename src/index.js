@@ -1,11 +1,57 @@
 import "./main.scss";
 import "./fonts/fonts.scss";
 
+//Получаем блоr
+const choosePicture = document.querySelector(".chooseWrapper");
+
+//Получаем кнопку для окна выбора картинки
+const buttonOpen = document.querySelector(".chooseImg");
+
+//Получаем кнопку для закрытия окна выбора картинки
+
+const buttonClose = document.querySelector(".closeImg");
+
+//Получаем кнопку для подтверждения выбора картинки
+
+const buttonChoose = document.getElementById("choosePicture__button");
+//Получаем модальное окно
+
+const modalWindow = document.querySelector(".choosePicture");
+
+//Получаем массив инпутов
+
+const pictureArr = document.querySelectorAll('input[name="picture"]');
+
+//Добавляем обработчик событий кнопке с выбором картинки
+
+buttonChoose.addEventListener("click", function () {
+	let selectedPicture;
+	for (const picture of pictureArr) {
+		if (picture.checked) {
+			selectedPicture = picture.value;
+			break;
+		}
+	}
+	choosePicture.style.backgroundImage = `url(${selectedPicture})`;
+	modalWindow.classList.remove("active");
+});
+
+buttonOpen.addEventListener("click", function () {
+	console.log("Кнопка нажата.");
+	modalWindow.classList.add("active");
+});
+
+buttonClose.addEventListener("click", function () {
+	console.log("Кнопка нажата.");
+	modalWindow.classList.remove("active");
+});
+
 // Получаем форму
 const form = document.getElementById("goalForm");
 
 // Добавляем обработчик события 'submit' на форму
 form.addEventListener("submit", function (event) {
+<<<<<<< Updated upstream
   event.preventDefault(); // Предотвращаем стандартное поведение формы
 
   // Получаем текущую дату и время
@@ -56,6 +102,54 @@ form.addEventListener("submit", function (event) {
 
   // Очищаем поля формы
   form.reset();
+=======
+	event.preventDefault(); // Предотвращаем стандартное поведение формы
+
+	// Получаем текущую дату и время
+	const currentDate = new Date();
+
+	// Получаем значение даты из формы
+	const endDate = new Date(document.getElementById("endDate").value);
+	const today = new Date(); // Получаем текущую дату
+
+	// Проверяем, если выбранная дата меньше текущей, выводим сообщение об ошибке и не сохраняем данные
+	if (endDate < today) {
+		window.alert("Пожалуйста, выберите дату не ранее сегодняшнего дня.");
+		return; // Прекращаем выполнение функции
+	}
+
+	// Получаем значения из остальных полей формы
+	const goal = document.getElementById("goal").value;
+	const category = document.getElementById("category").value;
+	const amount = document.getElementById("amount").value;
+	const priority = document.getElementById("priority").value;
+	const currentAmount = document.getElementById("currentAmount").value;
+	const picture = document.querySelector('input[name="picture"]:checked').value;
+
+	// Создаем объект для хранения данных текущей цели
+	const goalData = {
+		goal: goal,
+		category: category,
+		amount: amount,
+		priority: priority,
+		endDate: endDate.toLocaleDateString(), // Преобразуем дату в строку для сохранения
+		currentAmount: currentAmount,
+		creationDate: currentDate.toLocaleString(), // Добавляем текущую дату и время создания цели
+		picture: picture,
+	};
+
+	// Получаем сохраненные ранее цели из локального хранилища
+	let savedGoals = JSON.parse(localStorage.getItem("goals")) || [];
+
+	// Добавляем текущую цель к сохраненным целям
+	savedGoals.push(goalData);
+
+	// Сохраняем обновленный массив целей в локальное хранилище
+	localStorage.setItem("goals", JSON.stringify(savedGoals));
+
+	// Очищаем поля формы
+	form.reset();
+>>>>>>> Stashed changes
 });
 
 const amount_input = document.getElementById("amount");

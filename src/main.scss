@@ -2,87 +2,149 @@ body,
 input,
 select,
 button {
+<<<<<<< Updated upstream
   font-family: Arial, sans-serif;
+=======
+	font-family: Arial, sans-serif;
+>>>>>>> Stashed changes
 }
 
 body {
-  display: grid;
-  grid-template-columns: 60% 40%;
-  background-color: #ededed;
-  padding: 20px;
-  margin: 0;
+	display: grid;
+	grid-template-columns: 60% 40%;
+	background-color: #ededed;
+	padding: 20px;
+	margin: 0;
 }
 
 label {
-  color: #009fdf;
-  font-size: 16px;
+	color: #009fdf;
+	font-size: 16px;
 }
 
 input,
 select {
-  background-color: #ededed;
-  width: 100%;
-  padding: 12px 20px;
-  margin-top: 10px;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+	background-color: #ededed;
+	width: 100%;
+	padding: 12px 20px;
+	margin-top: 10px;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
 }
 
 img {
-  max-width: 100%;
+	max-width: 100%;
 }
 
 .main {
-  display: flex;
-  height: 90vh;
-  padding: 20px;
-  border: 2px solid white;
-  border-radius: 5px;
-  background-color: white;
+	display: flex;
+	height: 90vh;
+	padding: 20px;
+	border: 2px solid white;
+	border-radius: 5px;
+	background-color: white;
 }
 
 .picture {
-  display: flex;
-  align-items: center;
-  margin-left: 20px;
-  height: 90vh;
-  padding: 20px;
-  border: 2px solid white;
-  border-radius: 5px;
-  background-color: white;
+	display: flex;
+	align-items: center;
+	margin-left: 20px;
+	height: 90vh;
+	padding: 20px;
+	border: 2px solid white;
+	border-radius: 5px;
+	background-color: white;
 }
 
 .el {
-  margin-top: 30px;
+	margin-top: 30px;
 }
 
 #endDate {
-  margin-bottom: 50px;
+	margin-bottom: 50px;
 }
 
 #goalForm {
-  width: 50%;
+	/*width: 50%; перемещено в класс left*/
+
+	display: flex;
+	flex-direction: row;
+}
+
+.left {
+	width: 50%;
 }
 
 button#add {
-  background-color: #0a2973;
-  font-size: 20px;
-  color: white;
-  padding: 14px 20px;
-  margin: 30px 0;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  width: 100%;
-  transition: 0.3s ease;
+	background-color: #0a2973;
+	font-size: 20px;
+	color: white;
+	padding: 14px 20px;
+	margin: 30px 0;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+	width: 100%;
+	transition: 0.3s ease;
 
-  &:hover {
-    background-color: #112e77dd;
-  }
+	&:hover {
+		background-color: #112e77dd;
+	}
 }
 
+//НАЧАЛО выбор изображения
+.choosePicture {
+	background-color: #009fdf;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	/* скрываем модальное окно */
+	position: fixed; /* фиксированное положение */
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgb(0, 159, 223, 0.5); /* цвет фона */
+	z-index: 1050;
+	opacity: 0; /* по умолчанию модальное окно прозрачно */
+	-webkit-transition: opacity 200ms ease-in;
+	-moz-transition: opacity 200ms ease-in;
+	transition: opacity 200ms ease-in; /* анимация перехода */
+	pointer-events: none; /* элемент невидим для событий мыши */
+	margin: 0;
+	padding: 20px;
+}
+
+.active {
+	opacity: 1; /* делаем окно видимым */
+	pointer-events: auto; /* элемент видим для событий мыши */
+	overflow-y: auto; /* добавляем прокрутку по y, когда элемент не помещается на страницу */
+	width: 90%;
+	height: 90%;
+	margin: auto;
+}
+
+.choosePicture input {
+	//visibility: hidden;
+	color: #009fdf;
+}
+
+.choosePicture input:checked + img {
+	border: 5px solid #112e77dd;
+}
+
+.sr-only {
+	clip: rect(0 0 0 0);
+	clip-path: inset(100%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+<<<<<<< Updated upstream
 .error {
   font-size: 14px;
   color: red;
@@ -110,3 +172,53 @@ button#add {
     }
   }
 }
+=======
+.chooseWrapper {
+	margin: auto;
+	width: 200px;
+	height: 200px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-image: url("https://images.pexels.com/photos/3393477/pexels-photo-3393477.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+	background-size: cover;
+}
+
+.chooseImg {
+	margin: auto;
+	width: 94px;
+	height: 94px;
+	background-color: rgba(237, 237, 237, 0.516);
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.chooseImg_img {
+	margin: auto;
+}
+
+.choosePicture__label {
+	margin: 10px;
+}
+
+.closeImg {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	width: 32px;
+}
+
+#choosePicture__button {
+	position: absolute;
+	right: 41%;
+	bottom: 10px;
+	background-color: #0a2973;
+	color: white;
+	height: 40px;
+	border-radius: 50px;
+}
+
+//КОНЕЦ выбор изображения
+>>>>>>> Stashed changes

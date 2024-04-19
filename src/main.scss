@@ -1,43 +1,36 @@
-body,
-input,
-select,
-button {
-	font-family: Arial, sans-serif;
-}
-
-body {
+.bodyForm {
 	display: grid;
 	grid-template-columns: 60% 40%;
 	background-color: #ededed;
-	padding: 20px;
+	padding: 1.25rem;
 	margin: 0;
+	font-family: Arial, sans-serif;
 }
 
-label {
-	color: #009fdf;
-	font-size: 16px;
+label.el {
+	font-size: 1rem; /* Заменил px на rem */
 }
 
-input,
-select {
+input.item,
+select.choice{
 	background-color: #ededed;
 	width: 100%;
-	padding: 12px 20px;
-	margin-top: 10px;
+	padding: 0.75rem 1.25rem; /* Заменил px на rem */
+	margin-top: 1rem; /* Заменил px на rem */
 	display: inline-block;
 	border: 1px solid #ccc;
 	border-radius: 4px;
 	box-sizing: border-box;
 }
 
-img {
+#target {
 	max-width: 100%;
 }
 
-.main {
+.mainForm {
 	display: flex;
 	height: 90vh;
-	padding: 20px;
+	padding: 1.25rem;
 	border: 2px solid white;
 	border-radius: 5px;
 	background-color: white;
@@ -46,25 +39,23 @@ img {
 .picture {
 	display: flex;
 	align-items: center;
-	margin-left: 20px;
+	margin-left: 1.25rem; 
 	height: 90vh;
-	padding: 20px;
+	padding: 1.25rem;
 	border: 2px solid white;
 	border-radius: 5px;
 	background-color: white;
 }
 
 .el {
-	margin-top: 30px;
+	margin-top: 1.5rem;
 }
 
 #endDate {
-	margin-bottom: 50px;
+	margin-bottom: 3.125rem; 
 }
 
 #goalForm {
-	/*width: 50%; перемещено в класс left*/
-
 	display: flex;
 	flex-direction: row;
 }
@@ -75,16 +66,15 @@ img {
 
 button#add {
 	background-color: #0a2973;
-	font-size: 20px;
+	font-size: 1.25rem; 
 	color: white;
-	padding: 14px 20px;
-	margin: 30px 0;
+	padding: 0.875rem 1.25rem; 
+	margin: 1.875rem 0; 
 	border: none;
 	border-radius: 10px;
 	cursor: pointer;
 	width: 100%;
 	transition: 0.3s ease;
-
 	&:hover {
 		background-color: #112e77dd;
 	}
@@ -92,42 +82,36 @@ button#add {
 
 //НАЧАЛО выбор изображения
 .choosePicture {
-	background-color: #009fdf;
+	background-color: #a7bbc3;
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	/* скрываем модальное окно */
-	position: fixed; /* фиксированное положение */
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background: rgb(0, 159, 223, 0.5); /* цвет фона */
+	grid-template-columns: repeat(3,1fr);
+	position: fixed;
+	background: rgba(164, 164, 164, 0.5);
 	z-index: 1050;
-	opacity: 0; /* по умолчанию модальное окно прозрачно */
+	opacity: 0;
 	-webkit-transition: opacity 200ms ease-in;
 	-moz-transition: opacity 200ms ease-in;
-	transition: opacity 200ms ease-in; /* анимация перехода */
-	pointer-events: none; /* элемент невидим для событий мыши */
+	transition: opacity 200ms ease-in;
+	pointer-events: none;
 	margin: 0;
-	padding: 20px;
+	padding: 1.25rem;
 }
 
 .active {
-	opacity: 1; /* делаем окно видимым */
-	pointer-events: auto; /* элемент видим для событий мыши */
-	overflow-y: auto; /* добавляем прокрутку по y, когда элемент не помещается на страницу */
+	opacity: 1;
+	pointer-events: auto;
+	overflow-y: auto;
 	width: 90%;
 	height: 90%;
 	margin: auto;
 }
 
 .choosePicture input {
-	//visibility: hidden;
 	color: #009fdf;
 }
 
 .choosePicture input:checked + img {
-	border: 5px solid #112e77dd;
+	border: 0.3125rem solid #009fdf; 
 }
 
 .sr-only {
@@ -141,13 +125,14 @@ button#add {
 }
 
 .error {
-	font-size: 14px;
+	font-size: 0.875rem; 
 	color: red;
 }
+
 .block_for_btn {
 	display: flex;
 	justify-content: flex-start;
-	margin-top: 30px;
+	margin-top: 1.875rem;
 	gap: 1.25rem;
 	#btn_cancel,
 	#btn_save {
@@ -156,9 +141,9 @@ button#add {
 		border-radius: 10px;
 		background-color: white;
 		color: #009fdf;
-		font-size: 17px;
+		font-size: 1.0625rem; 
 		font-weight: 600;
-		border: 2px solid #009fdf;
+		border: 0.125rem solid #009fdf; 
 		cursor: pointer;
 		transition: 0.3s ease;
 		&:hover {
@@ -167,11 +152,13 @@ button#add {
 		}
 	}
 }
+
 .chooseWrapper {
 	margin: auto;
-	width: 200px;
-	height: 200px;
+	width: 12.5rem; 
+	height: 12.5rem; 
 	display: flex;
+	border-radius: 5px;
 	justify-content: center;
 	align-items: center;
 	background-image: url("https://images.pexels.com/photos/3393477/pexels-photo-3393477.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
@@ -180,38 +167,42 @@ button#add {
 
 .chooseImg {
 	margin: auto;
-	width: 94px;
-	height: 94px;
-	background-color: rgba(237, 237, 237, 0.516);
+	width: 5.875rem; 
+	height: 5.875rem; 
+	background-color: rgba(237, 237, 237, 0.734);
 	border-radius: 50%;
 	display: flex;
 	justify-content: center;
-	align-items: center;
 }
 
 .chooseImg_img {
 	margin: auto;
 }
 
-.choosePicture__label {
-	margin: 10px;
-}
-
 .closeImg {
 	position: absolute;
-	top: 0px;
-	right: 0px;
-	width: 32px;
+	top: 0;
+	right: 0;
+	width: 2rem;
 }
 
 #choosePicture__button {
 	position: absolute;
 	right: 41%;
-	bottom: 10px;
-	background-color: #0a2973;
-	color: white;
-	height: 40px;
-	border-radius: 50px;
+	bottom: 1.25rem; 
+	background-color:#009fdf;
+	color: rgb(255, 255, 255);
+	height: 2.5rem;
+	border: 0.0625rem solid;
+	border-radius: 0.625rem; 
 }
 
-//КОНЕЦ выбор изображения
+.pictureImg {
+	width: 100%; /* чтобы изображение внутри кнопки занимало всю доступную ширину */
+	height: auto; /* чтобы сохранить соотношение сторон изображения */
+}
+
+.choosePicture__label {
+	margin: 0.625rem; 
+	width: 25vw;
+}

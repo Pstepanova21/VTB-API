@@ -13,18 +13,21 @@
   padding: 1.25rem;
   margin: 0;
   font-family: Arial, sans-serif;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 label.el {
-  font-size: 1rem; /* Заменил px на rem */
+  font-size: 1rem;
 }
 
 input.item,
 select.choice {
   background-color: #ededed;
   width: 100%;
-  padding: 0.75rem 1.25rem; /* Заменил px на rem */
-  margin-top: 1rem; /* Заменил px на rem */
+  padding: 0.75rem 1.25rem;
+  margin-top: 1rem;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -37,14 +40,16 @@ select.choice {
 }
 
 .mainForm {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  height: 90vh;
+  display: grid;
+  grid-template-columns: 70% 30%;
   padding: 1.25rem;
   border: 2px solid white;
   border-radius: 5px;
   background-color: white;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 90vh;
 }
 
 .picture {

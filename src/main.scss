@@ -5,6 +5,7 @@
 	padding: 1.25rem;
 	margin: 0;
 	font-family: Arial, sans-serif;
+	justify-content: center;
 }
 
 label.el {
@@ -28,12 +29,15 @@ select.choice{
 }
 
 .mainForm {
-	display: flex;
-	height: 90vh;
+	display: grid;
+	grid-template-columns: 70% 30%;
 	padding: 1.25rem;
 	border: 2px solid white;
 	border-radius: 5px;
 	background-color: white;
+	align-items: center;
+	height: 90vh;
+
 }
 
 .picture {

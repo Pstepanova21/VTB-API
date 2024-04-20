@@ -1,6 +1,8 @@
 import "./main.scss";
 import "./fonts/fonts.scss";
 
+// window.localStorage.clear();
+
 // Получаем форму
 const form = document.getElementById("goalForm");
 
@@ -27,6 +29,7 @@ form.addEventListener("submit", function (event) {
   const priority = document.getElementById("priority").value;
   const currentAmount = document.getElementById("currentAmount").value;
 
+  console.log(selectedPicture);
   // Создаем объект для хранения данных текущей цели
   const goalData = {
     goal: goal,
@@ -55,8 +58,10 @@ form.addEventListener("submit", function (event) {
 
   // Очищаем поля формы
   form.reset();
+  targetBtnUpd();
 });
 
+const category_input = document.getElementById("category");
 const amount_input = document.getElementById("amount");
 const current_Amount = document.getElementById("currentAmount");
 const p_amount = document.createElement("p");
@@ -99,7 +104,6 @@ const choosePicture = document.querySelector(".chooseWrapper");
 //Добавляем обработчик событий кнопке с выбором картинки
 category_input.addEventListener("change", function () {
   const category = document.getElementById("category").value;
-  console.log(category);
   let selectedPicture =
     category === "house"
       ? "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -116,11 +120,8 @@ category_input.addEventListener("change", function () {
       : category === "shopping"
       ? "https://images.pexels.com/photos/135620/pexels-photo-135620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
       : "https://images.pexels.com/photos/3393477/pexels-photo-3393477.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
-  console.log(selectedPicture);
-  // let catImg = document.createElement("img");
-  // choosePicture.appendChild(catImg);
-  // catImg.style.src = selectedPicture;
   choosePicture.style.backgroundImage = `url("${selectedPicture}")`;
+  choosePicture.style.border = "none";
 });
 
 function formBtnUpd() {
@@ -128,6 +129,7 @@ function formBtnUpd() {
   btn_cancel.addEventListener("click", function (evt) {
     evt.preventDefault();
     form.reset();
+    targetBtnUpd();
   });
 }
 
@@ -284,16 +286,17 @@ class Target {
   }
 }
 
-// JSON массив из Local storage -> массив для скрипта
-let targetsListJson = localStorage.getItem("goals");
-targetsList = targetsListJson ? JSON.parse(targetsListJson) : [];
-
 // Отображение целей из Local storage при загрузке страницы
 document.addEventListener("DOMContentLoaded", targetBtnUpd);
 
 function targetBtnUpd() {
   changeFormToTarget(); // "Список целей - страница" главная
 
+  // JSON массив из Local storage -> массив для скрипта
+  let targetsListJson = localStorage.getItem("goals");
+  targetsList = targetsListJson ? JSON.parse(targetsListJson) : [];
+
+  targetWrapper.innerHTML = "";
   emptyError.textContent = ""; // Ошибка-уведомление: пустой массив целей
   if (targetsList.length === 0) {
     emptyError.textContent = "Добавьте первую цель";

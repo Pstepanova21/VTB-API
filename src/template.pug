@@ -1,17 +1,20 @@
 doctype html
-html(lang= 'ru')
-
-head
-  meta(charset='UTF-8')
-  meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title VTB-API
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title PR_3 DRAFT
+    //- link(rel='preconnect', href='https://fonts.googleapis.com')
+    //- link(rel='preconnect', href='https://fonts.gstatic.com', crossorigin='')
+    //- link(href='https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap', rel='stylesheet')
   body
+    // Часть 1 - ветка target
     .general_wrapper
       header
         .header_wrapper
-          img#logoImg(src='images/Logo.png', alt='logo')
+          img#logoImg(src=require('./images/Logo.png'), alt='logo')
           #header_top
-            img#userImg(src='images/UserAvatar.png', alt='user')
+            img#userImg(src=require('./images/UserAvatar.png'), alt='user')
             button#target_add_button.target_add_button
           #header_middle
             button#home_page.home_page
@@ -24,75 +27,45 @@ head
         section.target_page_wrapper
           .target_wrapper
           .target_empty-error
-        
-        section.main
-        form#goalForm
-        .general-wrapper#general-wrapper
-        .container#container 
-        .left
-          .el
-            label(for="goal") Название цели
-            input(type="text", id="goal", name="goal", placeholder="Введите название цели", required)
-          .el
-            label(for="category") Категория
-            select(id="category", name="category", required)
-              option(value="") Выберите категорию
-              option(value="house") Дом
-              option(value="car") Машина
-              option(value="equipment") Техника
-              option(value="kids") Дети
-              option(value="education") Обучение
-              option(value="travel") Отпуск
-              option(value="shopping") Шоппинг
-              option(value="other") Другое
-          .el
-            label(for="amount") Сумма, которую вы хотите накопить, руб.
-            input(type="text", id="amount", name="amount", placeholder="Введите сумму", pattern="[0-9]*", title="Только цифры разрешены", required)
-          .el
-            label(for="priority") Приоритет цели
-            select(id="priority", name="priority", required)
-              option(value="") Выберите приоритет
-              option(value="1") Высокий
-              option(value="2") Средний
-              option(value="3") Низкий
-          .el
-            label(for="endDate") Дата окончания накопления
-            input(type="date", id="endDate", name="endDate", required)
-          .el
-            label(for="currentAmount") Сумма, которую хотите внести сейчас, руб.
-            input(id="currentAmount",type='text' ,name="currentAmount", placeholder="Введите сумму", pattern="[0-9]*", title="Только цифры разрешены", )
-          .block_for_btn
-            button(type="submit",id="btn_save") Сохранить 
-            button(type="submit", id="btn_cancel") Отмена
-          //button(type="submit", id="add") Пополнить
-
-          .choosePicture
-            img.closeImg(src='../src/images/close_image.svg')
-            label.choosePicture__label(for='homePicture')
-              input#homePicture.sr-only(type='radio' name='picture' value='https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
-              img.pictureImg(src='https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
-            label.choosePicture__label(for='carPicture')
-              input#carPicture.sr-only(type='radio' name='picture' value='https://images.pexels.com/photos/18262220/pexels-photo-18262220.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
-              img.pictureImg(src='https://images.pexels.com/photos/18262220/pexels-photo-18262220.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
-            label.choosePicture__label(for='techPicture')
-              input#techPicture.sr-only(type='radio' name='picture' value='https://images.pexels.com/photos/326503/pexels-photo-326503.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
-              img.pictureImg(src='https://images.pexels.com/photos/326503/pexels-photo-326503.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
-            label.choosePicture__label(for='kidsPicture')
-              input#kidsPicture.sr-only(type='radio' name='picture' value='https://images.pexels.com/photos/8208262/pexels-photo-8208262.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
-              img.pictureImg(src='https://images.pexels.com/photos/8208262/pexels-photo-8208262.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
-            label.choosePicture__label(for='studyingPicture')
-              input#studyingPicture.sr-only(type='radio' name='picture' value='https://images.pexels.com/photos/9572509/pexels-photo-9572509.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
-              img.pictureImg(src='https://images.pexels.com/photos/9572509/pexels-photo-9572509.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
-            label.choosePicture__label(for='travelPicture')
-              input#travelPicture.sr-only(type='radio' name='picture' value='https://images.pexels.com/photos/2373201/pexels-photo-2373201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
-              img.pictureImg(src='https://images.pexels.com/photos/2373201/pexels-photo-2373201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
-            label.choosePicture__label(for='defaultPicture')
-              input#defaultPicture.sr-only(type='radio' name='picture' value='https://images.pexels.com/photos/3393477/pexels-photo-3393477.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
-              img.pictureImg(src='https://images.pexels.com/photos/3393477/pexels-photo-3393477.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')
-            button#choosePicture__button(type="button") Выбрать картинку
-        .chooseWrapper
-          .chooseImg
-            img.chooseImg_img(src='../src/images/add_image.svg')
-      .form-actions
-    section.picture#picture
-      img(src="https://s3-alpha-sig.figma.com/img/32c0/c596/6dd2b796fc33de37262580d822a2547b?Expires=1713744000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=oPoiOinwFJDcXxapgbpcnxyqfHLDNYcMJgjQtgtm2HcMl8CG0iwMIQghH0FlWqnEafjulE1uzyz-nqMOjHGujiaikq0ebkgBAKB5Q2EbLS1Sb5qomlYElTQMnjZyssBXAVfjzr5VBNAap0p7w4xcriL7-ZcT0Q9jVke2Z0LXsfeJj7b-XtYfz5uKXaNeDtrtum4fzO68XkzhkmSwsBF8Wrp1w3trBFOKPvPWqI-mFBzNCxBS8stnKffzMW~TTsoFjfnLC8drxVQA176CmCadTQs5~cjvQZ48Cws3th-3lxYEoueVpEQttaGo-ngg2f7HDgvimW9K1vKFYL0wDklWTw__", alt="")
+        // Часть 2 - ветка form
+        section.bodyForm_wrapper
+          .bodyForm
+            form#goalForm
+              .left
+                .el
+                  label(for='goal') &Ncy;&acy;&zcy;&vcy;&acy;&ncy;&icy;&iecy; &tscy;&iecy;&lcy;&icy;
+                  input#goal.item(type='text', name='goal', placeholder='Введите название цели', required='')
+                .el
+                  label(for='category') &Kcy;&acy;&tcy;&iecy;&gcy;&ocy;&rcy;&icy;&yacy;
+                  select#category.choice(name='category', required='')
+                    option(value='') &Vcy;&ycy;&bcy;&iecy;&rcy;&icy;&tcy;&iecy; &kcy;&acy;&tcy;&iecy;&gcy;&ocy;&rcy;&icy;&yucy;
+                    option(value='house') &Dcy;&ocy;&mcy;
+                    option(value='car') &Mcy;&acy;&shcy;&icy;&ncy;&acy;
+                    option(value='equipment') &Tcy;&iecy;&khcy;&ncy;&icy;&kcy;&acy;
+                    option(value='kids') &Dcy;&iecy;&tcy;&icy;
+                    option(value='education') &Ocy;&bcy;&ucy;&chcy;&iecy;&ncy;&icy;&iecy;
+                    option(value='travel') &Ocy;&tcy;&pcy;&ucy;&scy;&kcy;
+                    option(value='shopping') &SHcy;&ocy;&pcy;&pcy;&icy;&ncy;&gcy;
+                    option(value='other') &Dcy;&rcy;&ucy;&gcy;&ocy;&iecy;
+                .el
+                  label(for='amount') &Scy;&ucy;&mcy;&mcy;&acy;, &kcy;&ocy;&tcy;&ocy;&rcy;&ucy;&yucy; &vcy;&ycy; &khcy;&ocy;&tcy;&icy;&tcy;&iecy; &ncy;&acy;&kcy;&ocy;&pcy;&icy;&tcy;&softcy;, &rcy;&ucy;&bcy;.
+                  input#amount.item(type='text', name='amount', placeholder='Введите сумму', pattern='[0-9]*', title='Только цифры разрешены', required='')
+                .el
+                  label(for='priority') &Pcy;&rcy;&icy;&ocy;&rcy;&icy;&tcy;&iecy;&tcy; &tscy;&iecy;&lcy;&icy;
+                  select#priority.choice(name='priority', required='')
+                    option(value='') &Vcy;&ycy;&bcy;&iecy;&rcy;&icy;&tcy;&iecy; &pcy;&rcy;&icy;&ocy;&rcy;&icy;&tcy;&iecy;&tcy;
+                    option(value='1') &Vcy;&ycy;&scy;&ocy;&kcy;&icy;&jcy;
+                    option(value='2') &Scy;&rcy;&iecy;&dcy;&ncy;&icy;&jcy;
+                    option(value='3') &Ncy;&icy;&zcy;&kcy;&icy;&jcy;
+                .el
+                  label(for='endDate') &Dcy;&acy;&tcy;&acy; &ocy;&kcy;&ocy;&ncy;&chcy;&acy;&ncy;&icy;&yacy; &ncy;&acy;&kcy;&ocy;&pcy;&lcy;&iecy;&ncy;&icy;&yacy;
+                  input#endDate.item(type='date', name='endDate', required='')
+                .el
+                  label(for='currentAmount') &Scy;&ucy;&mcy;&mcy;&acy;, &kcy;&ocy;&tcy;&ocy;&rcy;&ucy;&yucy; &khcy;&ocy;&tcy;&icy;&tcy;&iecy; &vcy;&ncy;&iecy;&scy;&tcy;&icy; &scy;&iecy;&jcy;&chcy;&acy;&scy;, &rcy;&ucy;&bcy;.
+                  input#currentAmount.item(type='text', name='currentAmount', placeholder='Введите сумму', pattern='[0-9]*', title='Только цифры разрешены')
+                .block_for_btn
+                  button#btn_save(type='submit') &Scy;&ocy;&khcy;&rcy;&acy;&ncy;&icy;&tcy;&softcy;
+                  button#btn_cancel(type='submit') &Ocy;&tcy;&mcy;&iecy;&ncy;&acy;
+              .chooseWrapper
+            #picture.picture
+              img#target_pic(src='https://s3-alpha-sig.figma.com/img/32c0/c596/6dd2b796fc33de37262580d822a2547b?Expires=1713744000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=oPoiOinwFJDcXxapgbpcnxyqfHLDNYcMJgjQtgtm2HcMl8CG0iwMIQghH0FlWqnEafjulE1uzyz-nqMOjHGujiaikq0ebkgBAKB5Q2EbLS1Sb5qomlYElTQMnjZyssBXAVfjzr5VBNAap0p7w4xcriL7-ZcT0Q9jVke2Z0LXsfeJj7b-XtYfz5uKXaNeDtrtum4fzO68XkzhkmSwsBF8Wrp1w3trBFOKPvPWqI-mFBzNCxBS8stnKffzMW~TTsoFjfnLC8drxVQA176CmCadTQs5~cjvQZ48Cws3th-3lxYEoueVpEQttaGo-ngg2f7HDgvimW9K1vKFYL0wDklWTw__', alt='')

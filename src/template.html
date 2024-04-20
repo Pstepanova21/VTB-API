@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PR_3 DRAFT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="merge_styles.css" />
+  </head>
+  <body>
+    <!-- Часть 1 - ветка target -->
+    <div class="general_wrapper">
+      <header>
+        <div class="header_wrapper">
+          <img id="logoImg" src="images/Logo.png" alt="logo" />
+          <div id="header_top">
+            <img id="userImg" src="images/UserAvatar.png" alt="user" />
+            <button id="target_add_button" class="target_add_button"></button>
+          </div>
+          <div id="header_middle">
+            <button id="home_page" class="home_page"></button>
+            <button id="target_page" class="target_page"></button>
+            <button id="setting_page" class="setting_page"></button>
+          </div>
+          <div id="header_bottom">
+            <button id="help_page" class="help_page"></button>
+            <button id="logout_page" class="logout_page"></button>
+          </div>
+        </div>
+      </header>
+      <main>
+        <section class="target_page_wrapper">
+          <div class="target_wrapper"></div>
+          <div class="target_empty-error"></div>
+        </section>
+        <!-- Часть 2 - ветка form -->
+        <section class="bodyForm_wrapper">
+          <div class="bodyForm">
+            <form id="goalForm">
+              <div class="left">
+                <div class="el">
+                  <label for="goal">Название цели</label
+                  ><input
+                    class="item"
+                    type="text"
+                    id="goal"
+                    name="goal"
+                    placeholder="Введите название цели"
+                    required />
+                </div>
+                <div class="el">
+                  <label for="category">Категория</label
+                  ><select
+                    class="choice"
+                    id="category"
+                    name="category"
+                    required>
+                    <option value="">Выберите категорию</option>
+                    <option value="house">Дом</option>
+                    <option value="car">Машина</option>
+                    <option value="equipment">Техника</option>
+                    <option value="kids">Дети</option>
+                    <option value="education">Обучение</option>
+                    <option value="travel">Отпуск</option>
+                    <option value="shopping">Шоппинг</option>
+                    <option value="other">Другое</option>
+                  </select>
+                </div>
+                <div class="el">
+                  <label for="amount"
+                    >Сумма, которую вы хотите накопить, руб.</label
+                  ><input
+                    class="item"
+                    type="text"
+                    id="amount"
+                    name="amount"
+                    placeholder="Введите сумму"
+                    pattern="[0-9]*"
+                    title="Только цифры разрешены"
+                    required />
+                </div>
+                <div class="el">
+                  <label for="priority">Приоритет цели</label
+                  ><select
+                    class="choice"
+                    id="priority"
+                    name="priority"
+                    required>
+                    <option value="">Выберите приоритет</option>
+                    <option value="1">Высокий</option>
+                    <option value="2">Средний</option>
+                    <option value="3">Низкий</option>
+                  </select>
+                </div>
+                <div class="el">
+                  <label for="endDate">Дата окончания накопления</label
+                  ><input
+                    class="item"
+                    type="date"
+                    id="endDate"
+                    name="endDate"
+                    required />
+                </div>
+                <div class="el">
+                  <label for="currentAmount"
+                    >Сумма, которую хотите внести сейчас, руб.</label
+                  ><input
+                    class="item"
+                    id="currentAmount"
+                    type="text"
+                    name="currentAmount"
+                    placeholder="Введите сумму"
+                    pattern="[0-9]*"
+                    title="Только цифры разрешены" />
+                </div>
+                <div class="block_for_btn">
+                  <button type="submit" id="btn_save">Сохранить</button
+                  ><button type="submit" id="btn_cancel">Отмена</button>
+                </div>
+              </div>
+              <div class="chooseWrapper"></div>
+            </form>
+            <div class="picture" id="picture">
+              <img
+                src="https://s3-alpha-sig.figma.com/img/32c0/c596/6dd2b796fc33de37262580d822a2547b?Expires=1713744000&amp;Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&amp;Signature=oPoiOinwFJDcXxapgbpcnxyqfHLDNYcMJgjQtgtm2HcMl8CG0iwMIQghH0FlWqnEafjulE1uzyz-nqMOjHGujiaikq0ebkgBAKB5Q2EbLS1Sb5qomlYElTQMnjZyssBXAVfjzr5VBNAap0p7w4xcriL7-ZcT0Q9jVke2Z0LXsfeJj7b-XtYfz5uKXaNeDtrtum4fzO68XkzhkmSwsBF8Wrp1w3trBFOKPvPWqI-mFBzNCxBS8stnKffzMW~TTsoFjfnLC8drxVQA176CmCadTQs5~cjvQZ48Cws3th-3lxYEoueVpEQttaGo-ngg2f7HDgvimW9K1vKFYL0wDklWTw__"
+                alt=""
+                id="target_pic" />
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

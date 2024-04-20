@@ -1,7 +1,171 @@
 import "./main.scss";
 import "./fonts/fonts.scss";
 
-// Класс с методами для создания HTML-карточки цели
+// Получаем форму
+const form = document.getElementById("goalForm");
+
+// Добавляем обработчик события 'submit' на форму
+form.addEventListener("submit", function (event) {
+  event.preventDefault(); // Предотвращаем стандартное поведение формы
+
+  // Получаем текущую дату и время
+  const currentDate = new Date();
+  // Получаем значение даты из формы
+  const endDate = new Date(document.getElementById("endDate").value);
+  const today = new Date(); // Получаем текущую дату
+
+  // Проверяем, если выбранная дата меньше текущей, выводим сообщение об ошибке и не сохраняем данные
+  if (endDate < today) {
+    window.alert("Пожалуйста, выберите дату не ранее сегодняшнего дня.");
+    return; // Прекращаем выполнение функции
+  }
+
+  // Получаем значения из остальных полей формы
+  const goal = document.getElementById("goal").value;
+  const category = document.getElementById("category").value;
+  const amount = document.getElementById("amount").value;
+  const priority = document.getElementById("priority").value;
+  const currentAmount = document.getElementById("currentAmount").value;
+
+  // Создаем объект для хранения данных текущей цели
+  const goalData = {
+    goal: goal,
+    category: category,
+    amount: amount,
+    priority: priority,
+    endDate: endDate, // Преобразуем дату в строку для сохранения
+    currentAmount: currentAmount,
+    creationDate: currentDate, // Добавляем текущую дату и время создания цели
+  };
+
+  //проверяем пустой ли инпут `currentAmount`
+  if (currentAmount === "") {
+    //устанавливаем для объекта goalData его свойства currentAmount значение 0
+    goalData.currentAmount = "0";
+  }
+
+  // Получаем сохраненные ранее цели из локального хранилища
+  let savedGoals = JSON.parse(localStorage.getItem("goals")) || [];
+
+  // Добавляем текущую цель к сохраненным целям
+  savedGoals.push(goalData);
+
+  // Сохраняем обновленный массив целей в локальное хранилище
+  localStorage.setItem("goals", JSON.stringify(savedGoals));
+
+  // Очищаем поля формы
+  form.reset();
+});
+
+const amount_input = document.getElementById("amount");
+const current_Amount = document.getElementById("currentAmount");
+const p_amount = document.createElement("p");
+const p_current = document.createElement("p");
+const btn_save = document.getElementById("btn_save");
+//проверка,чтобы отрицательного числа не было для суммы накопления
+amount_input.addEventListener("change", function () {
+  if (amount_input.value.trim() < 0) {
+    amount_input.after(p_amount); //добавляем надпись,что введено отрицательное число и блокируем кнопку сохранить
+    p_amount.classList.add("error");
+    p_amount.textContent =
+      "Введено отрицательное число, исправьте на положительное число";
+    btn_save.disabled = true;
+    document.getElementById("add").disabled = true;
+  } else {
+    //если введено полож-ое число, очищаем поле для ошибок и разблокируем кнопку
+    p_amount.textContent = "";
+    btn_save.disabled = false;
+  }
+});
+//проверка,чтобы отрицательного числа не было для суммы пополнения
+current_Amount.addEventListener("change", function () {
+  if (current_Amount.value.trim() < 0) {
+    current_Amount.after(p_current); //добавляем надпись,что введено отрицательное число и блокируем кнопку сохранить
+    p_current.classList.add("error");
+    p_current.textContent =
+      "Введено отрицательное число, исправьте на положительное число";
+    btn_save.disabled = true;
+  } else if (current_Amount === "") {
+    btn_save.disabled = false;
+  } else {
+    //если введено полож-ое число,очищаем поле для ошибок и разблокируем кнопку
+    p_current.textContent = "";
+    btn_save.disabled = false;
+  }
+});
+
+//Получаем блок
+const choosePicture = document.querySelector(".chooseImg");
+//Добавляем обработчик событий кнопке с выбором картинки
+// document.getElementById("category").addEventListener("change", function () {
+//   let selectedPicture =
+//     selectElement.value === "house"
+//       ? "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+//       : selectElement.value === "car"
+//       ? "https://images.pexels.com/photos/18262220/pexels-photo-18262220.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+//       : selectElement.value === "equipment"
+//       ? "https://images.pexels.com/photos/326503/pexels-photo-326503.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+//       : selectElement.value === "kids"
+//       ? "https://images.pexels.com/photos/8208262/pexels-photo-8208262.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+//       : selectElement.value === "education"
+//       ? "https://images.pexels.com/photos/9572509/pexels-photo-9572509.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+//       : selectElement.value === "travel"
+//       ? "https://images.pexels.com/photos/2373201/pexels-photo-2373201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+//       : selectElement.value === "shopping"
+//       ? "https://images.pexels.com/photos/135620/pexels-photo-135620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+//       : "https://images.pexels.com/photos/3393477/pexels-photo-3393477.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
+//   choosePicture.style.backgroundImage = `url(${selectedPicture})`;
+// });
+
+function formBtnUpd() {
+  const btn_cancel = document.getElementById("btn_cancel");
+  btn_cancel.addEventListener("click", function (evt) {
+    evt.preventDefault();
+    form.reset();
+  });
+}
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!  Место склейки  !!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+// Скрипт 2 - ветка target
+
+// Кнопки бокового меню и их контейнеры
+const targetPageWrapper = document.querySelector(".target_page_wrapper");
+const targetPage = document.getElementById("target_page"); // Кнопка "Список целей - страница"
+const formPageWrapper = document.querySelector(".bodyForm_wrapper");
+const targetAddButton = document.getElementById("target_add_button"); // Кнопка "Форма - страница"
+
+// Обработка нажатия кнопки "Список целей - страница"
+targetPage.addEventListener("click", changeFormToTarget);
+
+function changeFormToTarget() {
+  targetPage.classList.add("active_menu_button");
+  targetPage.style.backgroundImage = "url(images/menu_middle2_active.svg)";
+
+  targetAddButton.style.backgroundImage = "url(images/menu_top1.svg)";
+  targetAddButton.classList.remove("active_menu_button");
+
+  formPageWrapper.classList.add("hidden");
+  targetPageWrapper.classList.remove("hidden");
+}
+
+// Обработка нажатия кнопки "Форма"
+targetAddButton.addEventListener("click", changeTargetToForm);
+
+function changeTargetToForm() {
+  targetPage.classList.remove("active_menu_button");
+  targetPage.style.backgroundImage = "url(images/menu_middle2.svg)";
+
+  targetAddButton.classList.add("active_menu_button");
+  targetAddButton.style.backgroundImage = "url(images/menu_top1_active.svg)";
+
+  targetPageWrapper.classList.add("hidden");
+  formPageWrapper.classList.remove("hidden");
+
+  formBtnUpd();
+}
+
+// Конструктор класса с методами для обработки входного массива
 class Target {
   constructor(
     name,
@@ -25,19 +189,19 @@ class Target {
   }
   getImg() {
     let categoryImg =
-      this.category === "Дом"
+      this.category === "house"
         ? "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        : this.category === "Машина"
+        : this.category === "car"
         ? "https://images.pexels.com/photos/18262220/pexels-photo-18262220.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        : this.category === "Техника"
+        : this.category === "equipment"
         ? "https://images.pexels.com/photos/326503/pexels-photo-326503.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        : this.category === "Дети"
+        : this.category === "kids"
         ? "https://images.pexels.com/photos/8208262/pexels-photo-8208262.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        : this.category === "Обучение"
+        : this.category === "education"
         ? "https://images.pexels.com/photos/9572509/pexels-photo-9572509.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        : this.category === "Отпуск"
+        : this.category === "travel"
         ? "https://images.pexels.com/photos/2373201/pexels-photo-2373201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-        : this.category === "Шоппинг"
+        : this.category === "shopping"
         ? "https://images.pexels.com/photos/135620/pexels-photo-135620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         : "https://images.pexels.com/photos/3393477/pexels-photo-3393477.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
     return categoryImg;
@@ -52,16 +216,10 @@ class Target {
     return this.priority;
   }
   getDueDate() {
-    const day = ("0" + this.dueDate.getDate()).slice(-2);
-    const month = ("0" + (this.dueDate.getMonth() + 1)).slice(-2);
-    const year = this.dueDate.getFullYear();
-    return day + "." + month + "." + year;
+    return new Date(this.dueDate).toLocaleDateString();
   }
   getStartDate() {
-    const day = ("0" + this.startDate.getDate()).slice(-2);
-    const month = ("0" + (this.startDate.getMonth() + 1)).slice(-2);
-    const year = this.startDate.getFullYear();
-    return day + "." + month + "." + year;
+    return new Date(this.dueDate).toLocaleDateString();
   }
   getDaysTillTargetEnd() {
     let currentDate = Date.now();
@@ -91,7 +249,7 @@ class Target {
     return (this.savedSum = this.savedSum + addSumm);
   }
   getDifferenceSum() {
-    return (this.totalSum - this.savedSum).toLocaleString("ru-RU");
+    return this.totalSum - this.savedSum;
   }
   getProgressNum() {
     let percent = (this.savedSum * 100) / this.totalSum;
@@ -120,131 +278,37 @@ class Target {
   }
 }
 
-// Массив с целями из Local storage
-// let targetsListJson = localStorage.getItem("savedGoals");
-// let targetsList = targetsListJson ? JSON.parse(targetsListJson) : [];
+// JSON массив из Local storage -> массив для скрипта
+let targetsListJson = localStorage.getItem("goals");
+targetsList = targetsListJson ? JSON.parse(targetsListJson) : [];
 
-// Проверочный пример массива объектов
-let today = new Date();
+// Отображение целей из Local storage при загрузке страницы
+document.addEventListener("DOMContentLoaded", targetBtnUpd);
 
-let targetsList = [
-  {
-    name: "Новая машина",
-    category: "Машина",
-    sum: 6000000,
-    priority: "3",
-    startDate: today,
-    dueDate: new Date("2024-06-13"),
-    savedSum: 500,
-  },
-  {
-    name: "Квартира",
-    category: "Дом",
-    sum: 16000000,
-    priority: "1",
-    startDate: today,
-    dueDate: new Date("2024-06-13"),
-    savedSum: 9000000,
-  },
-  {
-    name: "Полет на шаре",
-    category: "Другое",
-    sum: 100000,
-    priority: "2",
-    startDate: today,
-    dueDate: new Date("2024-09-18"),
-    savedSum: 12000,
-  },
-  {
-    name: "Фарфоровая кукла",
-    category: "Дети",
-    sum: 10000,
-    priority: "2",
-    startDate: today,
-    dueDate: new Date("2024-05-9"),
-    savedSum: 9980,
-  },
-  {
-    name: "Курсы фронтенда",
-    category: "Обучение",
-    sum: 100000,
-    priority: "2",
-    startDate: today,
-    dueDate: new Date("2024-06-13"),
-    savedSum: 12000,
-  },
-  {
-    name: "Мальдивы",
-    category: "Отпуск",
-    sum: 500000,
-    priority: "2",
-    startDate: today,
-    dueDate: new Date("2024-08-18"),
-    savedSum: 500000,
-  },
-  {
-    name: "Компьютер",
-    category: "Техника",
-    sum: 100000,
-    priority: "2",
-    startDate: today,
-    dueDate: new Date("2025-08-18"),
-    savedSum: 18000,
-  },
-];
+function targetBtnUpd() {
+  changeFormToTarget(); // "Список целей - страница" главная
 
-// Прописываем стиль по умолчанию кнопок бокового меню
-const targetPageWrapper = document.querySelector(".target_page_wrapper");
-const targetPage = document.getElementById("target_page");
-const targetAddButton = document.getElementById("target_add_button");
-
-targetAddButton.addEventListener("click", changePage);
-
-function changePage() {
-  targetPage.classList.remove("active_menu_button");
-  targetPage.style.backgroundImage = "url(images/menu_middle2.svg)";
-
-  targetAddButton.classList.add("active_menu_button");
-  targetAddButton.style.backgroundImage = "url(images/menu_top1_active.svg)";
-
-  targetPageWrapper.classList.add("hidden");
-}
-
-// Для отображения целей из Local storage при загрузке страницы
-// Елементы массива преобразуется в объекты, из них создаются карточки
-document.addEventListener("DOMContentLoaded", () => {
-  targetPage.classList.add("active_menu_button");
-  targetPage.style.backgroundImage = "url(images/menu_middle2_active.svg)";
-
-  targetAddButton.style.backgroundImage = "url(images/menu_top1.svg)";
-  targetAddButton.classList.remove("active_menu_button");
-
-  emptyError.textContent = "";
+  emptyError.textContent = ""; // Ошибка-уведомление: пустой массив целей
   if (targetsList.length === 0) {
     emptyError.textContent = "Добавьте первую цель";
   } else {
-    sortTargetList();
-    targetsList.forEach(function (target) {
+    sortTargetList(); // Сортировка массива: по приоритету и дате окончания
+    targetsList.forEach(function (
+      target // Массив объектов -> массив классов
+    ) {
       let targetElement = new Target(
-        // target.goal,
-        // target.category,
-        // target.amount,
-        // target.priority,
-        // target.creationDate,
-        // target.endDate,
-        // target.currentAmount
-        target.name,
+        target.goal,
         target.category,
-        target.sum,
-        target.priority,
-        target.startDate,
-        target.dueDate,
-        target.savedSum
+        Number(target.amount),
+        Number(target.priority),
+        target.creationDate,
+        target.endDate,
+        Number(target.currentAmount)
       );
-      createTargetCard(targetElement);
+      createTargetCard(targetElement); // Создание HTML-карточек целей
     });
   }
-});
+}
 
 // Сортировка массива для карточек - по приоритету, по дате окончания
 function sortTargetList() {
@@ -256,192 +320,188 @@ function sortTargetList() {
   );
 }
 
-// Функция для создания карточек целей
+// Контейнер под карточки целей и ошибка пустого массива
 const targetWrapper = document.querySelector(".target_wrapper");
 const emptyError = document.querySelector(".target_empty-error");
+// Контейнер Прогресс-бар
 const targetProgress = document.querySelector(".target_progress");
 
+// Создание HTML-карточек
 function createTargetCard(target) {
-  const targetCard = document.createElement("div");
+  const targetCard = document.createElement("div"); // Контейнер под карточку
   targetCard.classList.add("target_card");
   targetWrapper.append(targetCard);
 
-  // HTML под карточку
   targetCard.innerHTML = `
-  <div class="target_title">
-  <h2 class="target_name">${target.getName()}</h2>
-  <button class="target_add_savings"></button>
-  </div>
-  <div class="target_description">
-  <img class="target_img" src="${target.getImg()}" alt="${target.getCategory()}">
-  <div class="target_info">
-  <div class="target_due-date">
-  <p class="info-title">Конец сбора через:</p>
-  <p class="info-value">${target.getDaysTillTargetEnd()}</p>
-  </div>
-  <div class="target_sum-rest">
-  <p class="info-title">Осталось собрать:</p>
-  <p class="info-value target_card_diff">${target
-    .getDifferenceSum()
-    .toLocaleString("ru-RU")} ₽</p>
-  </div>
-  </div>
-  </div>
-  <div class="target_progress">
-  <p>Прогресс цели: <span class="target_card_saved">${target
-    .getSavedSum()
-    .toLocaleString("ru-RU")} ₽ из ${target
+    <div class="target_title">
+    <h2 class="target_name">${target.getName()}</h2>
+    <button class="target_add_savings"></button>
+    </div>
+    <div class="target_description">
+    <img class="target_img" src="${target.getImg()}" alt="${target.getCategory()}">
+    <div class="target_info">
+    <div class="target_due-date">
+    <p class="info-title">Конец сбора через:</p>
+    <p class="info-value">${target.getDaysTillTargetEnd()}</p>
+    </div>
+    <div class="target_sum-rest">
+    <p class="info-title">Осталось собрать:</p>
+    <p class="info-value target_card_diff">${target
+      .getDifferenceSum()
+      .toLocaleString("ru-RU")} ₽</p>
+    </div>
+    </div>
+    </div>
+    <div class="target_progress">
+    <p>Прогресс цели: <span class="target_card_saved">${target
+      .getSavedSum()
+      .toLocaleString("ru-RU")} ₽ из ${target
     .getTotalSum()
     .toLocaleString("ru-RU")} ₽</span></p>
-  <div class="progress-bar">
-  <div class="progress-bar-inner"></div>
-  </div>
-  </div>`;
+    <div class="progress-bar">
+    <div class="progress-bar-inner"></div>
+    </div>
+    </div>`;
 
-  // Создание подсказки
-  const buttonTargetAddSavings = targetCard.querySelector(
-    ".target_add_savings"
-  );
-  buttonTargetAddSavings.title = "Нажмите для пополнения или снятия";
-
-  // Создание прогресс-бара
+  // Создание прогресс-бара: внешний div, внутренний div, текстовый блок
   const progressBar = targetCard.querySelector(".progress-bar");
   const progressBarInner = targetCard.querySelector(".progress-bar-inner");
   let progressBarText = document.createElement("div");
-  // Определение цвета прогресс-бара
-  let progressColor =
-    target.getProgressNum() < 19
-      ? "#df2216"
-      : target.getProgressNum() >= 20 && target.getProgressNum() < 79
-      ? "#b6cc2d"
-      : target.getProgressNum() >= 80 && target.getProgressNum() < 100
-      ? "#50db3a"
-      : "#009fdf";
-  progressBarInner.style.background = progressColor;
 
-  // Решение стилизации маленького значения процента
-  if (target.getProgressNum() > 5 || target.getProgressNum() === 0) {
-    progressBarInner.style.width = target.getProgressNum() + "%";
-  } else {
-    progressBarInner.style.width = "4%";
-    progressBarInner.style.borderRadius = "0.625rem 0 0 0.625rem";
+  function createProgressBar(percent) {
+    // Определение цвета прогресс-бара
+    let progressColor =
+      percent < 19
+        ? "#df2216"
+        : percent >= 20 && percent < 79
+        ? "#b6cc2d"
+        : percent >= 80 && percent < 100
+        ? "#50db3a"
+        : "#009fdf";
+    progressBarInner.style.background = progressColor;
+
+    // Решение стилизации маленького значения процента
+    if (percent > 5 || percent === 0) {
+      progressBarInner.style.width = percent + "%";
+      progressBarInner.style.borderRadius = "0.625rem";
+    } else {
+      progressBarInner.style.width = "4%";
+      progressBarInner.style.borderRadius = "0.625rem 0 0 0.625rem";
+    }
+
+    // Определение местоположения значения процента
+    progressBarText.textContent = percent + "%";
+    progressBarText.classList.add("progress_bar_text");
+
+    if (percent >= 20) {
+      progressBarInner.append(progressBarText);
+    } else {
+      progressBar.append(progressBarText);
+    }
   }
 
-  // Определение местоположения значения процента
-  progressBarText.textContent = target.getProgressNum() + "%";
-  progressBarText.classList.add("progress_bar_text");
+  createProgressBar(target.getProgressNum());
 
-  if (target.getProgressNum() >= 20) {
-    progressBarInner.append(progressBarText);
-  } else {
-    progressBar.append(progressBarText);
-  }
-
-  //Анимация не заработала - сделали пока стилизацию
+  // Стилизация 100%
   const targetInfo = targetCard.querySelector(".target_info");
   const target_description = targetCard.querySelector(".target_description");
 
   const targetInfoVictory = document.createElement("div");
   target_description.append(targetInfoVictory);
 
-  if (target.getProgressNum() === 100) {
-    targetInfo.classList.add("hidden");
-    targetInfoVictory.innerHTML = `
-    <img class="target_victory" src="./images/target_victory.svg" alt="Цель выполнена">
-    <p class="info-value">Цель выполнена</p>
-    `;
+  function targetVictory(percent) {
+    if (percent === 100) {
+      targetInfo.classList.add("hidden");
+      targetInfoVictory.innerHTML = `
+        <img class="target_victory" src="./images/target_victory.svg" alt="Цель выполнена">
+        <p class="info-value">Цель выполнена</p>
+        `;
+    }
   }
 
-  // Создание модального окна
-  const differenceSumText = targetCard.querySelector(".target_card_diff");
-  const savedSumText = targetCard.querySelector(".target_card_saved");
+  targetVictory(target.getProgressNum());
+
+  // Контейнер модального окна
   const generalWrapper = document.querySelector(".general_wrapper");
   const modalBackGround = document.createElement("div");
   generalWrapper.append(modalBackGround);
 
-  targetCard.querySelector(".target_add_savings").onclick = function () {
-    modalBackGround.classList.add("modal-background");
-    // Тело модального окна по нажатию кнопки
-    modalBackGround.innerHTML = `
-    <div class="modal-window">
-    <div class="target_title">
-    <h2 class="target_name">${target.getName()}</h2>
-    <button class="modal-close"></button>
-    </div>
-    <div class="modal-info">
-    <div class="modal_totalsum_info">
-    <p class="info-title">Сумма для накопления:</p>
-    <p class="info-value">${target.getTotalSum().toLocaleString("ru-RU")} ₽</p>
-    </div>
-    <div class="modal_duedate_info">
-    <p class="info-title">Дата окончания накопления:</p>
-    <p class="info-value">${target.getDueDate()}</p>
-    </div>
-    </div>
-    <div class="target_progress">
-    <p>Накоплено: <span class="saved-sum">${target
-      .getSavedSum()
-      .toLocaleString("ru-RU")} ₽</span></p>
-    <p>До выполнения цели: <span class="difference-sum">${target
-      .getDifferenceSum()
-      .toLocaleString("ru-RU")} ₽</span></p>
-    </div>
-    <div class="modal-button-wrapper">
-    <div class="modal-buttons">
-    <input type="number" class="input-sum" placeholder="Введите сумму, руб">
-    <button class="modal-add-saving">Пополнить</button>
-    <button class="modal-withdraw-savings">Снять</button>
-    </div>
-    <p class="error-display"></p>
-    </div>
-    </div>
-  </div>`;
+  // Элементы для обновления инфо внутри модального окна
+  const differenceSumText = targetCard.querySelector(".target_card_diff");
+  const savedSumText = targetCard.querySelector(".target_card_saved");
 
-    //Находим элементы для работы внутри функции
+  // Создание подсказки для кнопки-стрелки "Пополнить счёт"
+  const buttonTargetAddSavings = targetCard.querySelector(
+    ".target_add_savings"
+  );
+  buttonTargetAddSavings.title = "Нажмите для пополнения или снятия";
+
+  // Вызов модального окна
+  buttonTargetAddSavings.onclick = function () {
+    modalBackGround.classList.add("modal-background");
+    modalBackGround.innerHTML = ` <div class="modal-window">
+      <div class="target_title">
+      <h2 class="target_name">${target.getName()}</h2>
+      <button class="modal-close"></button>
+      </div>
+      <div class="modal-info">
+      <div class="modal_totalsum_info">
+      <p class="info-title">Сумма для накопления:</p>
+      <p class="info-value">${target
+        .getTotalSum()
+        .toLocaleString("ru-RU")} ₽</p>
+      </div>
+      <div class="modal_duedate_info">
+      <p class="info-title">Дата окончания накопления:</p>
+      <p class="info-value">${target.getDueDate()}</p>
+      </div>
+      </div>
+      <div class="target_progress">
+      <p>Накоплено: <span class="saved-sum">${target
+        .getSavedSum()
+        .toLocaleString("ru-RU")} ₽</span></p>
+      <p>До выполнения цели: <span class="difference-sum">${target
+        .getDifferenceSum()
+        .toLocaleString("ru-RU")} ₽</span></p>
+      </div>
+      <div class="modal-button-wrapper">
+      <div class="modal-buttons">
+      <input type="number" class="input-sum" placeholder="Введите сумму, руб">
+      <button class="modal-add-saving">Пополнить</button>
+      <button class="modal-withdraw-savings">Снять</button>
+      </div>
+      <p class="error-display"></p>
+      </div>
+      </div>
+    </div>`;
+
+    // Элементы для обновления элементов в модальном и на главной
     const errorDisplay = modalBackGround.querySelector(".error-display");
-    const buttonAddSavings = modalBackGround.querySelector(".modal-add-saving");
-    const buttonWDSavings = modalBackGround.querySelector(
-      ".modal-withdraw-savings"
-    );
-    const buttonCloseModal = modalBackGround.querySelector(".modal-close");
-    buttonCloseModal.style.backgroundImage =
-      "url(images/target_add_savings_close.svg)";
     const inputSum = modalBackGround.querySelector(".input-sum");
     const savedSumElement = modalBackGround.querySelector(".saved-sum");
     const diffSumElement = modalBackGround.querySelector(".difference-sum");
+
+    // Объект для вывода из функции на главную
     let savedSumModal = [
       target.getSavedSum(),
       target.getDifferenceSum(),
       target.getTotalSum(),
       target.getProgressNum(),
+      target.getName(),
     ];
 
-    // Проверка состояния кнопок внутри модального окна
-    if (target.getTotalSum() === target.getSavedSum()) {
-      buttonAddSavings.disabled = true;
-      buttonWDSavings.disabled = false;
-    } else {
-      if (target.getSavedSum() === 0) {
-        buttonWDSavings.disabled = true;
-        buttonAddSavings.disabled = false;
-      } else {
-        buttonAddSavings.disabled = false;
-        buttonWDSavings.disabled = false;
-      }
-    }
+    // Кнопки пополнить - снять - закрыть окно
+    const buttonAddSavings = modalBackGround.querySelector(".modal-add-saving"); // Кнопка "Пополнить"
+    const buttonWDSavings = modalBackGround.querySelector(
+      // Кнопка "Снять"
+      ".modal-withdraw-savings"
+    );
+    const buttonCloseModal = modalBackGround.querySelector(".modal-close"); // Кнопка "Закрыть модальное окно"
+    buttonCloseModal.style.backgroundImage =
+      "url(images/target_add_savings_close.svg)";
 
-    function updateTargetInfo(target) {
-      // Обновление модального после нажатия кнопок
-      inputSum.value = "";
-      savedSumElement.textContent =
-        target.getSavedSum().toLocaleString("ru-RU") + " ₽";
-      diffSumElement.textContent =
-        target.getDifferenceSum().toLocaleString("ru-RU") + " ₽";
-
-      buttonCloseModal.style.backgroundImage =
-        "url(images/target_add_savings_save.svg)";
-
-      // Проверка состояния кнопок внутри модального окна
+    // Состояние кнопок пополнить-снять при открытии модального окна
+    function modalButtonCheck() {
       if (target.getTotalSum() === target.getSavedSum()) {
         buttonAddSavings.disabled = true;
         buttonWDSavings.disabled = false;
@@ -454,14 +514,35 @@ function createTargetCard(target) {
           buttonWDSavings.disabled = false;
         }
       }
+    }
+    modalButtonCheck();
+
+    // Обновление информации в модальном окне
+    function updateTargetInfo(target) {
+      inputSum.value = ""; // Обнуление инпута
+      savedSumElement.textContent =
+        target.getSavedSum().toLocaleString("ru-RU") + " ₽";
+      diffSumElement.textContent =
+        target.getDifferenceSum().toLocaleString("ru-RU") + " ₽";
+
+      // Изменение стиля кнопки закрытия, если нажимались пополнить-снять
+      buttonCloseModal.style.backgroundImage =
+        "url(images/target_add_savings_save.svg)";
+
+      // Состояние кнопок пополнить-снять при работе в модальном окне
+      modalButtonCheck();
+
       // Обновление блоков, если до этого было 100%
       targetInfo.classList.remove("hidden");
       targetInfoVictory.innerHTML = "";
+
+      // На выходе из функции обновленные значения сумм цели
       return (savedSumModal = [
         target.getSavedSum(),
         target.getDifferenceSum(),
         target.getTotalSum(),
         target.getProgressNum(),
+        target.getName(),
       ]);
     }
 
@@ -506,43 +587,20 @@ function createTargetCard(target) {
       )} ₽ из ${savedSumModal[2].toLocaleString("ru-RU")} ₽`;
       differenceSumText.textContent =
         savedSumModal[1].toLocaleString("ru-RU") + " ₽";
-      // Будет повтор, подумать над оптимизацией:
-      // Кусок раз:
-      let progressColorTwo =
-        savedSumModal[3] < 19
-          ? "#df2216"
-          : savedSumModal[3] >= 20 && savedSumModal[3] < 79
-          ? "#b6cc2d"
-          : savedSumModal[3] >= 80 && savedSumModal[3] < 100
-          ? "#50db3a"
-          : "#009fdf";
-      progressBarInner.style.background = progressColorTwo;
 
-      // Кусок два:
-      if (savedSumModal[3] > 5 || savedSumModal[3] === 0) {
-        progressBarInner.style.width = savedSumModal[3] + "%";
-        progressBarInner.style.borderRadius = "0.625rem";
-      } else {
-        progressBarInner.style.width = "4%";
-        progressBarInner.style.borderRadius = "0.625rem 0 0 0.625rem";
-      }
-      // Кусок три:
-      progressBarText.textContent = savedSumModal[3] + " %";
+      // Перезапись прогресс-бара после модального окна
+      createProgressBar(savedSumModal[3]);
 
-      if (savedSumModal[3] >= 20) {
-        progressBarInner.append(progressBarText);
-      } else {
-        progressBar.append(progressBarText);
-      }
+      // Отрабока 100% выполнения цели
+      targetVictory(savedSumModal[3]);
 
-      // Кусок четыре - 100%
-      if (savedSumModal[3] === 100) {
-        targetInfo.classList.add("hidden");
-        targetInfoVictory.innerHTML = `
-    <img class="target_victory" src="./images/target_victory.svg" alt="Цель выполнена">
-    <p class="info-value">Цель выполнена</p>
-    `;
-      }
+      // Обновление данных в LocalStorage
+      const listElement = targetsList.find(
+        (el) => el.goal === savedSumModal[4]
+      );
+      listElement.currentAmount = savedSumModal[0];
+      console.log(listElement.savedSum);
+      localStorage.setItem("goals", JSON.stringify(targetsList));
     };
   };
 }

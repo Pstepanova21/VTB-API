@@ -97,25 +97,31 @@ current_Amount.addEventListener("change", function () {
 //Получаем блок
 const choosePicture = document.querySelector(".chooseImg");
 //Добавляем обработчик событий кнопке с выбором картинки
-// document.getElementById("category").addEventListener("change", function () {
-//   let selectedPicture =
-//     selectElement.value === "house"
-//       ? "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-//       : selectElement.value === "car"
-//       ? "https://images.pexels.com/photos/18262220/pexels-photo-18262220.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-//       : selectElement.value === "equipment"
-//       ? "https://images.pexels.com/photos/326503/pexels-photo-326503.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-//       : selectElement.value === "kids"
-//       ? "https://images.pexels.com/photos/8208262/pexels-photo-8208262.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-//       : selectElement.value === "education"
-//       ? "https://images.pexels.com/photos/9572509/pexels-photo-9572509.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-//       : selectElement.value === "travel"
-//       ? "https://images.pexels.com/photos/2373201/pexels-photo-2373201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-//       : selectElement.value === "shopping"
-//       ? "https://images.pexels.com/photos/135620/pexels-photo-135620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-//       : "https://images.pexels.com/photos/3393477/pexels-photo-3393477.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
-//   choosePicture.style.backgroundImage = `url(${selectedPicture})`;
-// });
+category_input.addEventListener("change", function () {
+  const category = document.getElementById("category").value;
+  console.log(category);
+  let selectedPicture =
+    category === "house"
+      ? "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      : category === "car"
+      ? "https://images.pexels.com/photos/18262220/pexels-photo-18262220.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      : category === "equipment"
+      ? "https://images.pexels.com/photos/326503/pexels-photo-326503.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      : category === "kids"
+      ? "https://images.pexels.com/photos/8208262/pexels-photo-8208262.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      : category === "education"
+      ? "https://images.pexels.com/photos/9572509/pexels-photo-9572509.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      : category === "travel"
+      ? "https://images.pexels.com/photos/2373201/pexels-photo-2373201.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      : category === "shopping"
+      ? "https://images.pexels.com/photos/135620/pexels-photo-135620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      : "https://images.pexels.com/photos/3393477/pexels-photo-3393477.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
+  console.log(selectedPicture);
+  // let catImg = document.createElement("img");
+  // choosePicture.appendChild(catImg);
+  // catImg.style.src = selectedPicture;
+  choosePicture.style.backgroundImage = `url("${selectedPicture}")`;
+});
 
 function formBtnUpd() {
   const btn_cancel = document.getElementById("btn_cancel");

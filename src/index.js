@@ -95,7 +95,7 @@ current_Amount.addEventListener("change", function () {
 });
 
 //Получаем блок
-const choosePicture = document.querySelector(".chooseImg");
+const choosePicture = document.querySelector(".chooseWrapper");
 //Добавляем обработчик событий кнопке с выбором картинки
 category_input.addEventListener("change", function () {
   const category = document.getElementById("category").value;

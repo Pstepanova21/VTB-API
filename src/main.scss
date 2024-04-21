@@ -326,15 +326,15 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 label.el {
-  font-size: 1rem; /* Заменил px на rem */
+  font-size: 1rem;
 }
 
 input.item,
 select.choice {
   background-color: #ededed;
   width: 100%;
-  padding: 0.75rem 1.25rem; /* Заменил px на rem */
-  margin-top: 0.5rem; /* Заменил px на rem */
+  padding: 0.75rem 1.25rem; 
+  margin-top: 0.5rem; 
   display: inline-block;
   border: 0.0625rem solid #ccc;
   -webkit-box-sizing: border-box;
@@ -346,8 +346,6 @@ select.choice {
 }
 
 .picture {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -357,6 +355,7 @@ select.choice {
   border-radius: 0.625rem;
   margin: 1rem;
   padding: 1.25rem;
+  height: 90vh;
 }
 
 .el {
@@ -368,8 +367,6 @@ select.choice {
 }
 
 #goalForm {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
@@ -380,6 +377,7 @@ select.choice {
   margin: 1rem;
   padding: 1.25rem 2.5rem;
   justify-content: center;
+  height: 90vh;
 }
 
 .left {

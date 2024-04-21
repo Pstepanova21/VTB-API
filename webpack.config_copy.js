@@ -1,3 +1,5 @@
+// Файл для локальной установки Webpack.config
+
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const FileManagerPlugin = require("filemanager-webpack-plugin");
@@ -52,15 +54,7 @@ module.exports = {
     new FileManagerPlugin({
       events: {
         onStart: {
-          delete: [
-            {
-              source: path.join(__dirname, "dist").replaceAll("\\", "/"),
-              options: {
-                force: true,
-                recursive: true,
-              },
-            },
-          ],
+          delete: ["dist"],
         },
       },
     }),

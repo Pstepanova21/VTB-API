@@ -1,0 +1,78 @@
+.header_wrapper {
+    background-color: white;
+    border-radius: 0.625rem;
+    margin: 1rem;
+    padding: 1rem;
+  }
+  
+  #logoImg {
+    width: 4rem;
+  }
+  #userImg {
+    height: 4rem;
+    width: 4rem;
+    border-radius: 0.625rem;
+  }
+  .header_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 2rem;
+    padding: 1rem 1.5rem;
+    height: 90%;
+    position: fixed;
+  }
+  #header_top,
+  #header_middle,
+  #header_bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  
+  #header_top img,
+  #header_top button,
+  #header_middle button,
+  #header_bottom button {
+    margin-top: 0.5rem;
+  }
+  
+  .target_add_button {
+    background-size: contain;
+    cursor: pointer;
+  }
+  
+  .target_add_button,
+  .home_page,
+  .target_page,
+  .setting_page,
+  .help_page,
+  .logout_page {
+    height: 4rem;
+    width: 4rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .active_menu_button {
+    background-color: #009fdf;
+    border-radius: 50%;
+  }
+  
+  .home_page {
+    background-image: url("images/menu_middle1.svg");
+  }
+  .setting_page {
+    background-image: url("images/menu_middle3.svg");
+  }
+  .help_page {
+    background-image: url("images/menu_bottom1.svg");
+  }
+  .logout_page {
+    background-image: url("images/menu_bottom2.svg");
+  }

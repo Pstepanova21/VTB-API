@@ -1,0 +1,92 @@
+/* Стили для модального окна */
+.modal-background {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .modal-window {
+    background-color: #fff;
+    margin: 10rem auto;
+    padding: 1.5rem;
+    width: 30%;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.625rem;
+  }
+  
+  .modal-close {
+    cursor: pointer;
+    height: 2rem;
+    width: 2rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: transparent;
+    border: none;
+  }
+  
+  .modal-info {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  .target_victory {
+    width: 5rem;
+    margin: 0 auto;
+  }
+  
+  .modal-add-saving,
+  .modal-withdraw-savings {
+    margin-top: 1.5rem;
+    margin-right: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.625rem;
+    background-color: white;
+    color: #009fdf;
+    font-size: 1rem;
+    font-weight: 600;
+    border: 0.125rem solid #009fdf;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  
+  .modal-add-saving:hover,
+  .modal-withdraw-savings:hover {
+    background-color: #009fdf;
+    color: white;
+  }
+  
+  .modal-add-saving:disabled,
+  .modal-withdraw-savings:disabled {
+    border: 0.0625rem solid #ccc;
+    background-color: #ededed;
+    color: #ababab;
+  }
+  
+  .input-sum {
+    background-color: #ededed;
+    width: 100%;
+    padding: 0.75rem 1.25rem;
+    margin-top: 0.125rem;
+    display: inline-block;
+    border: 0.0625rem solid #ccc;
+    border-radius: 0.25rem;
+    box-sizing: border-box;
+    font-size: 1rem;
+  }
+  
+  .error-display {
+    color: red;
+    font-size: 0.75rem;
+  }
